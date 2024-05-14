@@ -1,0 +1,21 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    {{ header }}
+{% endblock %}
+
+{% block main_block %}
+    <h1>{{ header }}</h1>
+
+    <a href="news/" style="display: block">News</a>
+    <a href="about/" style="display: block">About us</a>
+    <a href="services/" style="display: block">Services</a>
+    <a href="faq/" style="display: block">FAQ</a>
+    <a href="contacts/" style="display: block">Contact us</a>
+    <a href="privacy_policy/" style="display: block">Privacy policy</a>
+    <a href="auth/" style="display: block">Log in</a>
+{#    <a href="/about">Contact us</a>#}
+    <h2>Latest news: </h2>
+    {% include 'news_app/news_article_preview.html' with value=latest_news path=path %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'news_app/layout.html' %}
+
+{% block title_block %}
+    News
+{% endblock %}
+
+{% block main_block %}
+    <h1>News</h1>
+
+    {% for value in news %}
+        {% include "news_app/news_article_preview.html" with value=value path=value.id %}
+    {% endfor %}
+
+{% endblock %}

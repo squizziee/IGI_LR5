@@ -1,0 +1,16 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    Services
+{% endblock %}
+
+{% block main_block %}
+    <h1>Services</h1>
+
+    {% for service in services %}
+        <a href="{{ service.id }}/">{{ service.name }}</a>
+        <br>
+    {% endfor %}
+
+
+{% endblock %}

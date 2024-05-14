@@ -1,0 +1,13 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    FAQ
+{% endblock %}
+
+{% block main_block %}
+    <h1>Frequently asked questions (FAQ)</h1>
+    {% for faq in faq_list %}
+        {% include 'mainapp/faq/faq_block.html' with value=faq %}
+    {% endfor %}
+
+{% endblock %}

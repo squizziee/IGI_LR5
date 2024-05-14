@@ -1,0 +1,16 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    Service masters
+{% endblock %}
+
+{% block main_block %}
+    <h1>Service masters</h1>
+
+    {% for master in master_list %}
+        <span>Master {{ master.name }}</span>
+        <br>
+    {% endfor %}
+
+
+{% endblock %}
