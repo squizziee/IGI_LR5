@@ -29,4 +29,18 @@ def masters(request, service_type_id, service_id, device_type_id, device_id):
     master_list = []
     for spec in master_specialities:
         master_list += list(Master.objects.filter(speciality=spec.id))
-    return render(request, 'service_app/service_masters.html', {'master_list': master_list})
+
+    service_type = ServiceType.objects.filter(id=service_type_id).first()
+    service = Service.objects.filter(id=service_id).first()
+
+    device_type = DeviceType.objects.filter(id=device_type_id).first()
+    device = Device.objects.filter(id=device_id).first()
+
+    full_entry = {
+        'service_type': service_type,
+        'service': service,
+        'device_type': device_type,
+        'device': device,
+        'master_list': master_list
+    }
+    return render(request, 'service_app/service_masters.html', full_entry)

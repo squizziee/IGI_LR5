@@ -8,7 +8,18 @@
     <h1>Service masters</h1>
 
     {% for master in master_list %}
-        <span>Master {{ master.name }}</span>
+        <span>
+            <span>Master {{ master.name }}</span>
+            <form action="{% url 'add_to_cart' %}" method="post">
+                <input type="text" hidden name="service_type" value="{{ service_type.id }}">
+                <input type="text" hidden name="service" value="{{ service.id }}">
+                <input type="text" hidden name="device_type" value="{{ device_type.id }}">
+                <input type="text" hidden name="device" value="{{ device.id }}">
+                <input type="text" hidden name="master" value="{{ master.id }}">
+                {% csrf_token %}
+                <button type="submit">Add to cart</button>
+            </form>
+        </span>
         <br>
     {% endfor %}
 

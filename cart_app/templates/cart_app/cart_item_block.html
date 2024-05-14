@@ -1,0 +1,32 @@
+<style>
+    button.remove_btn {
+        outline: none;
+        padding: 5px 10px;
+        border-radius: 0;
+        border: 4px solid black;
+        background-color: transparent;
+        font-family: Consolas, sans-serif;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: .2s ease-in-out;
+        cursor: pointer;
+    }
+    button.remove_btn:hover {
+        background-color: black;
+        color: #f7f7f7;
+    }
+</style>
+
+<div style="background-color: #f7f7f7; font-family: Consolas, sans-serif; padding: 20px; margin-bottom: 15px">
+    <span style="font-weight: bold">{{ item.service_type.name }} - {{ item.service.name }} - ${{ item.service.base_price_in_usd }}</span>
+    <br>
+    <span style="background-color: black; color: #f7f7f7">{{ item.device_type.name }} {{ item.device.name }}</span>
+    <br>
+    <span>Will be performed by {{ item.master.name }}, {{ item.master.experience_in_years }} years of experience</span>
+    <br>
+    <form action="{% url 'remove_from_cart' %}" method="post">
+        {% csrf_token %}
+        <input type="text" hidden name="entry_index" value="{{ item.index }}">
+        <button class="remove_btn" type="submit">Remove from cart</button>
+    </form>
+</div>
