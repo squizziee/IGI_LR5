@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'service_app',
     'auth_app',
     'cart_app',
-    'user_app'
+    'user_app',
+    'master_app'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/auth/'

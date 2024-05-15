@@ -3,7 +3,7 @@ from django.db import models
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=User.objects.filter(pk=1).first())
     phone_number = models.CharField("User contact phone number", max_length=20)
     name = models.CharField("User full name", max_length=100)
     address = models.CharField("User full address", max_length=200)

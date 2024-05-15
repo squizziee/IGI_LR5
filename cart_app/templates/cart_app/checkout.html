@@ -9,6 +9,10 @@
 
     <form action="{% url 'create_order' %}" method="post">
         {% csrf_token %}
+        <input type="email" name="email" placeholder="Email">
+        <br>
+        <input type="password" name="password" placeholder="Password">
+        <br>
         <input type="text" name="name" placeholder="Full name">
         <br>
         <input type="text" name="phone_number" placeholder="Phone number">

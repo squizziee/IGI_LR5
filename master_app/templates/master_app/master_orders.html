@@ -1,0 +1,16 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    Order entries
+{% endblock %}
+
+{% block main_block %}
+    <h1>Order entries</h1>
+    <div>
+        {% for entry in entries %}
+            {% include 'master_app/master_order_block.html' with item=entry %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

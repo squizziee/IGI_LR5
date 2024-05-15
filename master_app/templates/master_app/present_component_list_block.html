@@ -1,0 +1,36 @@
+<style>
+    button.delete {
+        outline: none;
+        padding: 5px 10px;
+        border-radius: 0;
+        border: 4px solid firebrick;
+        color: firebrick;
+        background-color: transparent;
+        font-family: Consolas, sans-serif;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: .2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .card {
+        background-color: #f7f7f7;
+        font-family: Consolas, sans-serif;
+        padding: 20px;
+        margin: 0 15px 15px 15px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, .1);
+    }
+
+</style>
+
+<div class="card">
+    <span style="font-weight: bold">{{ component.name }}</span>
+     -
+    <span style="font-weight: bold">${{ component.price_in_usd }}</span>
+    <form action="{% url 'remove_component' %}" method="post" style="margin: 0">
+        {% csrf_token %}
+        <input type="text" hidden name="component_id" value="{{ component.id }}">
+        <input type="text" hidden name="entry_id" value="{{ entry_id }}">
+        <button class="delete" type="submit">Remove</button>
+    </form>
+</div>

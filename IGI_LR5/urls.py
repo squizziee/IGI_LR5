@@ -28,6 +28,7 @@ urlpatterns = [
     path('cart/', include('cart_app.urls')),
     path('user/', include('user_app.urls')),
     path('services', include('service_app.urls')),
+    path('master/', include('master_app.urls')),
     path('', include('mainapp.urls'), name='home'),
 ]
 

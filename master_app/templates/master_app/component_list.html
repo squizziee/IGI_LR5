@@ -1,0 +1,19 @@
+
+{% block title_block %}
+    Order entries
+{% endblock %}
+
+{% block main_block %}
+    <h1>Present components</h1>
+    <div>
+        {% for present_component in present_components %}
+            {% include 'master_app/present_component_list_block.html' with component=present_component entry_id=entry_id %}
+        {% endfor %}
+    <h1>All components</h1>
+        {% for category in categories %}
+            {% include 'master_app/component_list_block.html' with category=category entry_id=entry_id %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

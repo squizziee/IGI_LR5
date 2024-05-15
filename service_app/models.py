@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -53,6 +54,7 @@ class MasterSpeciality(models.Model):
 
 # Master personal info
 class Master(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField("Master name", max_length=100)
     experience_in_years = models.IntegerField("Work experience in years")
     speciality = models.ForeignKey(MasterSpeciality, on_delete=models.CASCADE)
