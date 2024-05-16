@@ -31,6 +31,7 @@ urlpatterns = [
     path('services', include('service_app.urls')),
     path('master/', include('master_app.urls')),
     path('client/', include('client_app.urls')),
+    path('metrics/', include('metric_app.urls')),
     path('', include('mainapp.urls'), name='home'),
 ]
 

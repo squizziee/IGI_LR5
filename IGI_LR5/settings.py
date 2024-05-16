@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'cart_app',
     'user_app',
     'master_app',
-    'client_app'
+    'client_app',
+    'metric_app'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,29 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    Metrics
+{% endblock %}
+
+{% block main_block %}
+    <h1>Metrics</h1>
+    <h2>{{ metric1.name }}</h2>
+    {% for service, count in metric1.list.items %}
+        {{ service }} -  ordered {{ count }} times
+        <br>
+    {% endfor %}
+
+    <h2>{{ metric2.name }}</h2>
+    {% for master, total in metric2.list.items %}
+        {{ master }} - total of ${{ total }}
+        <br>
+    {% endfor %}
+
+    <h2>{{ metric3.name }}</h2>
+    {% for device_type, count in metric3.list.items %}
+        {{ device_type }} - ordered services {{ count }} times
+        <br>
+    {% endfor %}
+
+
+
+{% endblock %}

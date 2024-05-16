@@ -1,3 +1,6 @@
+import json
+
+import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -12,7 +15,9 @@ def index(request):
     data = {
         'latest_news': latest_news,
         'header': 'Home',
-        'path': 'news/' + str(latest_news.id)
+        'path': 'news/' + str(latest_news.id),
+        'joke': random_joke(request),
+        'cat_fact': random_cat_fact(request)
     }
     return render(request, 'mainapp/index.html', data)
 
@@ -74,3 +79,15 @@ def add_review(request):
     else:
         review.save()
     return redirect('/review/')
+
+
+def random_joke(request):
+    response = requests.get("https://official-joke-api.appspot.com/random_joke")
+    data = response.json()
+    return dict(data)
+
+
+def random_cat_fact(request):
+    response = requests.get("https://catfact.ninja/fact")
+    data = response.json()
+    return dict(data)
