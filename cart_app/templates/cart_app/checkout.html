@@ -6,21 +6,38 @@
 
 {% block main_block %}
     <h1>Checkout</h1>
-
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
     <form action="{% url 'create_order' %}" method="post">
         {% csrf_token %}
-        <input type="email" name="email" placeholder="Email">
-        <br>
-        <input type="password" name="password" placeholder="Password">
-        <br>
-        <input type="text" name="name" placeholder="Full name">
-        <br>
-        <input type="text" name="phone_number" placeholder="Phone number">
-        <br>
-        <input type="text" name="address" placeholder="Full address">
-        <br>
-        <input type="text" name="passport_serial" placeholder="Passport serial number">
-        <br>
+        {% if user.is_authenticated %}
+
+            <input type="text" name="name" placeholder="Full name" value="{{ user.username }}">
+            <br>
+            <input type="password" name="password" placeholder="Password">
+            <br>
+            <input type="text" name="passport_serial" placeholder="Passport serial number">
+            <br>
+        {% else %}
+            <input type="email" name="email" placeholder="Email">
+            <br>
+            <input type="password" name="password" placeholder="Password">
+            <br>
+            <input type="text" name="name" placeholder="Full name">
+            <br>
+            <input type="text" name="phone_number" placeholder="Phone number">
+            <br>
+            <input type="text" name="address" placeholder="Full address">
+            <br>
+            <input type="text" name="passport_serial" placeholder="Passport serial number">
+            <br>
+        {% endif %}
+
         <button type="submit">Order</button>
     </form>
 

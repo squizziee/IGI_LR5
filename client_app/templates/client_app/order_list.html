@@ -1,0 +1,16 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    Orders
+{% endblock %}
+
+{% block main_block %}
+    <h1>Orders</h1>
+    <div>
+        {% for order in orders %}
+            {% include 'client_app/order_list_block.html' with order=order.order entries=order.entries %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

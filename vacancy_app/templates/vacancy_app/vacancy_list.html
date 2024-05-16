@@ -1,0 +1,14 @@
+{% extends 'mainapp/layout.html' %}
+{% block title_block %}
+    Vacancies
+{% endblock %}
+
+{% block main_block %}
+    <h1>Vacancies</h1>
+    {% for vacancy in vacancies %}
+        {% include 'vacancy_app/vacancy_list_block.html' with vacancy=vacancy %}
+    {% endfor %}
+
+
+
+{% endblock %}

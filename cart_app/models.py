@@ -24,6 +24,14 @@ class Order(models.Model):
             total += entry.count_total()
         return total
 
+    def is_cancelled(self):
+        total = 0.0
+        entries = OrderEntry.objects.filter(order_id=self.id)
+        for entry in entries:
+            if entry.status != "Cancelled":
+                return False
+        return True
+
 
 # Entry in order. One order can contain multiple entries.
 class OrderEntry(models.Model):

@@ -1,7 +1,10 @@
 import datetime
 import json
+import re
 
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -82,7 +85,7 @@ def cart_items(request):
 
 def cart_checkout(request):
     items = json.loads(request.POST.get('items').replace('\'', '"'))
-    return render(request, 'cart_app/checkout.html', {'items': items})
+    return render(request, 'cart_app/checkout.html', {'items': items, 'user': request.user})
 
 
 def _count_total(entries):
@@ -102,9 +105,16 @@ def _auth_user(request):
 
     user_profile = UserProfile.objects.filter(passport_serial=passport_serial).first()
     if user_profile is None:
+
+        # phone_number_regex = r"\+375 \(29\) [0-9]{3}-[0-9]{2}-[0-9]{2}"
+        # print("gg" + str(phone_number))
+        # if re.match(phone_number_regex, str(phone_number)) is None:
+        #     messages.error(request, "Wrong phone number format")
+        #     return redirect('cart_items')
+
         new_user = User()
         new_user.email = email
-        new_user.password = password
+        new_user.set_password(password)
         new_user.username = name
         new_user.save()
 
@@ -115,6 +125,9 @@ def _auth_user(request):
         new_user_profile.address = address
         new_user_profile.passport_serial = passport_serial
         new_user_profile.save()
+
+        authenticate(username=name, password=password)
+
         return new_user_profile
     return user_profile
 

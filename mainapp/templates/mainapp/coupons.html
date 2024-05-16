@@ -1,0 +1,13 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    Coupons
+{% endblock %}
+
+{% block main_block %}
+    <h1>Coupons</h1>
+    {% for coupon in coupons %}
+        {% include 'mainapp/coupon_block.html' with coupon=coupon %}
+    {% endfor %}
+
+{% endblock %}
