@@ -1,4 +1,5 @@
 import json
+import logging
 
 import requests
 from django.contrib.auth.decorators import login_required
@@ -8,6 +9,8 @@ from news_app.models import NewsArticle
 from mainapp.models import FAQ, CompanyInfo, Coupon, Review
 from service_app.models import Master
 from user_app.models import UserProfile
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -78,6 +81,7 @@ def add_review(request):
         old_review_.save()
     else:
         review.save()
+    logger.info(f"Review of user {user.username} successfully added")
     return redirect('/review/')
 
 

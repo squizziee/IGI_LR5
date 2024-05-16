@@ -66,7 +66,7 @@
             <button class="control_btn accept">Accept</button>
         </form>
         {% endif %}
-        <form action="{% url 'component_list' %}" method="post">
+        <form action="{% url 'component_list' %}" method="get">
             {% csrf_token %}
             <input type="text" hidden name="entry_id" value="{{ item.entry.id }}">
             <button class="control_btn">Manage components</button>

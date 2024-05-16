@@ -92,6 +92,7 @@ def service_type_graph():
     plt.savefig("./img/service_type_graph.png")
     return "./img/service_type_graph.png"
 
+
 def master_graph():
     masters = Master.objects.all()
     result = {}
@@ -103,7 +104,7 @@ def master_graph():
         result[master.name] = count
     names = list(result.keys())
     values = list(result.values())
-    plt.bar(names, values, color='blue', width=0.5)
+    plt.barh(names, values, color='blue', height=0.5)
     plt.xlabel("Masters")
     plt.ylabel("Order entries")
     plt.title("Masters by count of order entries")

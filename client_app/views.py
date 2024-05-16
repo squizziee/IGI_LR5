@@ -1,7 +1,11 @@
+import logging
+
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 
 from cart_app.models import Order, OrderEntry
+
+logger = logging.getLogger(__name__)
 
 
 def is_not_master(user):
@@ -33,4 +37,5 @@ def cancel_order(request):
         for entry in entries:
             entry.status = "Cancelled"
             entry.save()
+            logger.info(f"Order with id {order.id} successfully cancelled by client")
     return redirect('order_list')

@@ -1,16 +1,16 @@
 import datetime
 import json
-import re
+import logging
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.contrib import messages
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from cart_app.models import Order, OrderEntry
 from service_app.models import ServiceType, Service, DeviceType, Device, Master
 from user_app.models import UserProfile
+
+logger = logging.getLogger(__name__)
 
 
 def _deserialize_entries(request):
@@ -63,7 +63,9 @@ def add_to_cart(request):
         # print(full_entry)
         # print(request.session['cart']['items'])
         request.session.modified = True
+        logger.info(f"Successfully added service with {service_id} to cart")
         return redirect(f'/services/{service_type_id}/{service_id}/{device_type_id}/{device_id}/masters')
+    logger.error(f"Something went wrong with cart update")
     return redirect('/')
 
 
@@ -71,6 +73,7 @@ def remove_from_cart(request):
     index = int(request.POST.get('entry_index'))
     del request.session['cart']['items'][index]
     request.session.modified = True
+    logger.info(f"Successfully removed entry with index {index} from cart)")
     return redirect('/cart/')
 
 
@@ -105,7 +108,7 @@ def _auth_user(request):
 
     user_profile = UserProfile.objects.filter(passport_serial=passport_serial).first()
     if user_profile is None:
-
+        logger.info("No user found. Creating new user.")
         # phone_number_regex = r"\+375 \(29\) [0-9]{3}-[0-9]{2}-[0-9]{2}"
         # print("gg" + str(phone_number))
         # if re.match(phone_number_regex, str(phone_number)) is None:
@@ -137,6 +140,8 @@ def create_order(request):
     items = _deserialize_entries(request)
     entries = []
 
+    logger.info("User successfully authenticated")
+
     order = Order()
     order.user_profile = user_profile
     order.application_date = datetime.datetime.today()
@@ -155,6 +160,7 @@ def create_order(request):
         print(entry.order_id)
     order.total = _count_total(entries)
     order.save()
-    request.session['cart']['items'] = []
+    logger.info(f"Order with id {order.id} successfully created")
+    request.session['cart']['items'] = [{}]
     request.session.modified = True
     return redirect('home')
