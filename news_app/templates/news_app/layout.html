@@ -8,6 +8,8 @@
     <title>{% block title_block %}{% endblock %}</title>
 </head>
 <body>
+
+    {% include 'mainapp/navigation.html' %}
     {% block main_block %}{% endblock %}
 </body>
 </html>

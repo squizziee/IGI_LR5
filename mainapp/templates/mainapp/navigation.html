@@ -1,47 +1,5 @@
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0 !important;
-        }
-
-        .horizontal_navigation {
-            background-color: #262626;
-        }
-
-        .horizontal_navigation ul {
-            display: flex;
-            list-style: none;
-            width: 100%;
-        }
-
-        .horizontal_navigation ul li {
-            padding: 20px
-        }
-
-        .horizontal_navigation ul li a {
-            text-decoration: none;
-            color: #ffffff;
-            font-family: "Roboto", sans-serif;
-            font-weight: 500;
-        }
-    </style>
-</head>
-<body>
-    <nav class="horizontal_navigation">
+<aside class="sidebar">
+    <nav>
         <ul>
             <li>
                 <a href="http://127.0.0.1:8000/" style="padding-right: 10px">Home</a>
@@ -84,14 +42,5 @@
             </li>
         </ul>
     </nav>
-    <h1>Order entries</h1>
-    <div>
-        {% for entry in entries %}
-            {% include 'master_app/master_order_block.html' with item=entry %}
-        {% endfor %}
-    </div>
-</body>
-</html>
 
-
-
+</aside>

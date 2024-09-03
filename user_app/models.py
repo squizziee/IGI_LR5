@@ -9,5 +9,10 @@ class UserProfile(models.Model):
     address = models.CharField("User full address", max_length=200)
     passport_serial = models.CharField("User passport serial", max_length=50)
 
+    import pytz
+    #TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
+
+    #timezone = models.CharField(max_length=32, choices=TIMEZONES)
+
     def __str__(self):
         return f"{self.name} - {self.passport_serial}"

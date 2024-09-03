@@ -7,20 +7,7 @@
 {% block main_block %}
     <div><h1>{{ header }}</h1></div>
 
-    <div>
-        <a href="news/" style="display: block">News</a>
-        <a href="about/" style="display: block">About us</a>
-        <a href="services/" style="display: block">Services</a>
-        <a href="cart/" style="display: block">Cart</a>
-        <a href="faq/" style="display: block">FAQ</a>
-        <a href="contacts/" style="display: block">Contact us</a>
-        <a href="coupons/" style="display: block">Coupons</a>
-        <a href="privacy_policy/" style="display: block">Privacy policy</a>
-        <a href="review/" style="display: block">Reviews</a>
-        <a href="auth/" style="display: block">Log in</a>
-        <a href="client/" style="display: block">Orders</a>
-        <a href="master/" style="display: block">For masters</a>
-    </div>
+
     <div><h2>Latest news</h2></div>
     {% include 'news_app/news_article_preview.html' with value=latest_news path=path %}
     <div style="width: 100%; padding: 20px;">

@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
-</head>
-<body>
-	<div>
+{% extends 'mainapp/layout.html' %}
+
+{% block main_block %}
+
+    <div>
 		<!-- Login form -->
 		<form method="post" enctype="multipart/form-data">
 			<h1>Log in</h1>
@@ -39,5 +35,6 @@
             <button type="submit" class="btn btn-primary">Log out</button>
         </form>
 	</div>
-</body>
-</html>
+
+{% endblock %}
+

@@ -2,6 +2,7 @@ import datetime
 import json
 import logging
 
+from tzlocal import get_localzone
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -127,6 +128,7 @@ def _auth_user(request):
         new_user_profile.name = name
         new_user_profile.address = address
         new_user_profile.passport_serial = passport_serial
+        #new_user_profile.timezone = get_localzone()
         new_user_profile.save()
 
         authenticate(username=name, password=password)

@@ -8,7 +8,13 @@
     <h1>Reviews</h1>
      <form action="{% url 'add_review' %}" method="post">
         {% csrf_token %}
-        <input type="number" max="5" min="1" name="rating" value="2">
+         <select name="rating" id="rating">
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             <option value="5">5</option>
+         </select>
          <br>
         <input type="text" max="5" min="1" name="text">
          <br>

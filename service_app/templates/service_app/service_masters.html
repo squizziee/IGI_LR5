@@ -11,6 +11,7 @@
         <span>
             <span>Master {{ master.name }}</span>
             <form action="{% url 'add_to_cart' %}" method="post">
+                <input type="text" hidden value="{{ hbvjhv }}" name="appointment_id">
                 <input type="text" hidden name="service_type" value="{{ service_type.id }}">
                 <input type="text" hidden name="service" value="{{ service.id }}">
                 <input type="text" hidden name="device_type" value="{{ device_type.id }}">
