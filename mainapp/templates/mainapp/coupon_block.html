@@ -1,34 +1,5 @@
-<style>
-    button.add {
-        outline: none;
-        padding: 5px 10px;
-        border-radius: 0;
-        border: 3px solid black;
-        background-color: transparent;
-        font-family: Consolas, sans-serif;
-        font-weight: bold;
-        margin-top: 10px;
-        margin-right: 10px;
-        transition: .2s ease-in-out;
-        cursor: pointer;
-    }
-    button.add:hover {
-        background-color: black;
-        color: #f7f7f7;
-    }
-
-    .card {
-        background-color: #f7f7f7;
-        font-family: Consolas, sans-serif;
-        padding: 20px;
-        margin: 0 15px 15px 15px;
-        box-shadow: 0 0 30px rgba(0, 0, 0, .1);
-    }
-
-</style>
-
 <div class="card">
     <span style="background: black; color: #f7f7f7">{{ coupon.service.name }} - {{ coupon.discount }}% discount</span>
-    <span style="display: block;">Coupon: {{ coupon.id }}</span>
+    <span style="display: block;">Promocode: {{ coupon.promocode }}</span>
 
 </div>

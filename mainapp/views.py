@@ -2,6 +2,7 @@ import json
 import logging
 
 import requests
+from django import template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -11,6 +12,12 @@ from service_app.models import Master
 from user_app.models import UserProfile
 
 logger = logging.getLogger(__name__)
+register = template.Library()
+
+
+@register.filter(name='has_group')
+def has_group(user, group_name):
+    return user.groups.filter(name=group_name).exists()
 
 
 def index(request):
@@ -66,6 +73,7 @@ def coupons(request):
     return render(request, 'mainapp/coupons.html', {'coupons': coupon_list})
 
 
+@login_required
 def reviews(request):
     review_list = Review.objects.all()
     return render(request, 'mainapp/reviews.html', {'reviews': review_list})

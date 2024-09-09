@@ -36,6 +36,7 @@ class Review(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     rating = models.IntegerField("Rating from 1 to 5", default=4)
     text = models.TextField("Review text")
+    created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.user_profile.name} - {self.rating} of 5"

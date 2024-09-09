@@ -95,10 +95,14 @@ def cart_checkout(request):
 
 def _count_total(entries, coupon):
     total = 0.0
-    for entry in entries:
-        if entry.service == coupon.service:
-            total += entry.service.base_price_in_usd * (1 - coupon.discount / 100)
-        else:
+    if coupon.is_active:
+        for entry in entries:
+            if entry.service == coupon.service:
+                total += entry.service.base_price_in_usd * (1 - coupon.discount / 100)
+            else:
+                total += entry.service.base_price_in_usd
+    else:
+        for entry in entries:
             total += entry.service.base_price_in_usd
     return total
 

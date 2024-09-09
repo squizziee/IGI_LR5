@@ -7,13 +7,15 @@
 {% block main_block %}
     <div class="main_info">
         {{ info.description | safe }}
-        <div class="article_image" id="certificate">
+        <figure class="article_image" id="certificate">
             <div>
                 <img src="{{ info.certificate.url }}" alt="Certificate image">
                 <br>
-                <a rel="nofollow" href="{{ info.certificate.url }}" download="certificate.png" target="_blank">Download</a>
+                <figcaption>
+                    <a rel="nofollow" href="{{ info.certificate.url }}" download="certificate.png" target="_blank">Download</a>
+                </figcaption>
             </div>
-        </div>
+        </figure>
         <h3>Requisites</h3>
         <div class="main_requisites">
             {{ info.requisite | safe }}

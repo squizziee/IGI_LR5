@@ -14,9 +14,21 @@
 <body>
     <div class="wrapper">
         {% include 'mainapp/navigation.html' %}
-        <div class="content">
+        <main class="content">
             {% block main_block %}{% endblock %}
-        </div>
+        </main>
+        <footer class="main_footer">
+            <div style="text-align: center">
+                <code>No rights reserved. CCC Inc., 2024</code>
+                <br>
+                <samp>
+                    Lorem ipsum dolor sit amet, consectetur <br>
+                    adipisicing elit. Aliquid at, cumque doloremque <br>
+                    doloribus illo maxime minima minus nam nisi non nulla obca <br>
+                    ecati officia optio pariatur possimus soluta susc<wbr>ipit ut voluptates .
+                </samp>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
