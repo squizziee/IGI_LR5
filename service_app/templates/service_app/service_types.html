@@ -8,7 +8,11 @@
     <h1>Service types</h1>
 
     {% for service_type in service_types %}
-        <a href="{{ service_type.id }}/">{{ service_type.name }}</a>
+        <div style="padding: 20px; background-color: #fafafa">
+            <a href="{{ service_type.id }}/">{{ service_type.name }}</a>
+            <br>
+            <span>{{ service_type.description }}</span>
+        </div>
         <br>
     {% endfor %}
 

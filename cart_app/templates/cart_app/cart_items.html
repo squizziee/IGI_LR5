@@ -13,24 +13,6 @@
     <div style="display: flex; justify-content: center; width: 100%">
         <form action="{% url 'cart_checkout' %}" method="post">
             {% csrf_token %}
-            <style>
-                button.checkout_btn {
-                    outline: none;
-                    padding: 5px 10px;
-                    border-radius: 0;
-                    border: 4px solid black;
-                    background-color: transparent;
-                    font-family: Consolas, sans-serif;
-                    font-weight: bold;
-                    margin-top: 10px;
-                    transition: .2s ease-in-out;
-                    cursor: pointer;
-                }
-                button.checkout_btn:hover {
-                    background-color: black;
-                    color: #f7f7f7;
-                }
-            </style>
             <input type="text" hidden name="items" value="{{ item_ids }}">
             <button class="checkout_btn" type="submit">Checkout</button>
         </form>

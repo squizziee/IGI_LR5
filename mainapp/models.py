@@ -15,16 +15,21 @@ class FAQ(models.Model):
 
 
 class CompanyInfo(models.Model):
-    description = models.TextField("Info about the company")
+    description = models.TextField("Info about the company in html")
+    logo = models.ImageField("Company logo", null=True)
+    promo_video = models.CharField("Promo video link", max_length=150, default="/")
+    certificate = models.ImageField("Company certificate", null=True)
+    requisite = models.TextField("Company requisites in html", default="")
 
 
 class Coupon(models.Model):
     discount = models.IntegerField("Discount in percent", default=15)
     is_active = models.BooleanField("Can be used?", default=True)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    promocode = models.CharField("Promocode", max_length=100, default="")
 
     def __str__(self):
-        return f"{self.service.name} - {self.discount}% discount"
+        return f"{self.service.name} - {self.discount}% discount - {self.promocode}"
 
 
 class Review(models.Model):
@@ -35,3 +40,21 @@ class Review(models.Model):
     def __str__(self):
         return f"{self.user_profile.name} - {self.rating} of 5"
 
+
+class CompanyPrivacyPolicy(models.Model):
+    htmltext = models.TextField("Html for privacy policy")
+
+
+class CompanySponsor(models.Model):
+    name = models.CharField("Sponsor name", max_length=100)
+    logo = models.ImageField("Sponsor logo", null=True)
+    info = models.TextField("Sponsor additional info")
+    website_link = models.CharField("Sponsor name", max_length=100, default="/")
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class CompanyBanner(models.Model):
+    image = models.ImageField("Banner image", null=True)
+    description = models.TextField("Banner info")

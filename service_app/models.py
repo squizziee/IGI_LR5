@@ -58,6 +58,7 @@ class Master(models.Model):
     name = models.CharField("Master name", max_length=100)
     experience_in_years = models.IntegerField("Work experience in years")
     speciality = models.ForeignKey(MasterSpeciality, on_delete=models.CASCADE)
+    photo = models.ImageField('Profile picture for master', null=True)
 
     def __str__(self):
         return self.name

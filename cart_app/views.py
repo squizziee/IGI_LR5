@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from cart_app.models import Order, OrderEntry
+from mainapp.models import Coupon
 from service_app.models import ServiceType, Service, DeviceType, Device, Master
 from user_app.models import UserProfile
 
@@ -71,7 +72,7 @@ def add_to_cart(request):
 
 
 def remove_from_cart(request):
-    index = int(request.POST.get('entry_index'))
+    index = int(request.POST.get('order_entry_id'))
     del request.session['cart']['items'][index]
     request.session.modified = True
     logger.info(f"Successfully removed entry with index {index} from cart)")
@@ -92,10 +93,13 @@ def cart_checkout(request):
     return render(request, 'cart_app/checkout.html', {'items': items, 'user': request.user})
 
 
-def _count_total(entries):
+def _count_total(entries, coupon):
     total = 0.0
     for entry in entries:
-        total += entry.service.base_price_in_usd
+        if entry.service == coupon.service:
+            total += entry.service.base_price_in_usd * (1 - coupon.discount / 100)
+        else:
+            total += entry.service.base_price_in_usd
     return total
 
 
@@ -128,7 +132,7 @@ def _auth_user(request):
         new_user_profile.name = name
         new_user_profile.address = address
         new_user_profile.passport_serial = passport_serial
-        #new_user_profile.timezone = get_localzone()
+        # new_user_profile.timezone = get_localzone()
         new_user_profile.save()
 
         authenticate(username=name, password=password)
@@ -139,6 +143,14 @@ def _auth_user(request):
 
 def create_order(request):
     user_profile = _auth_user(request)
+
+    promocode = request.POST.get('promocode')
+    coupon = Coupon.objects.filter(promocode=promocode).first()
+
+    if Coupon is not None:
+        coupon.is_active = False
+        coupon.save()
+
     items = _deserialize_entries(request)
     entries = []
 
@@ -160,9 +172,10 @@ def create_order(request):
         entries.append(entry)
         entry.save()
         print(entry.order_id)
-    order.total = _count_total(entries)
+
+    order.total = _count_total(entries, coupon)
     order.save()
     logger.info(f"Order with id {order.id} successfully created")
-    request.session['cart']['items'] = [{}]
+    request.session['cart']['items'] = []
     request.session.modified = True
     return redirect('home')

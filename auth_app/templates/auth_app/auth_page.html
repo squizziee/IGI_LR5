@@ -1,5 +1,7 @@
 {% extends 'mainapp/layout.html' %}
-
+{% block title_block %}
+    Log in
+{% endblock %}
 {% block main_block %}
 
     <div>
@@ -19,7 +21,7 @@
 
 			<div class="form-group">
 				<label for="exampleInputEmail1">Username</label>
-				<input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp"
+				<input type="text" class="form-control" name="username" id="exampleInputEmail1"
 					placeholder="Enter username" required>
 			</div>
 

@@ -5,20 +5,46 @@
 {% endblock %}
 
 {% block main_block %}
-    <div><h1>{{ header }}</h1></div>
+    <header class="main_header">
+        <h1>Computer Construction Company</h1>
+        <div class="header_logo" style="background-image: url({{ logo.url }})"></div>
+    </header>
+    <div class="main_banner">
+        <div class="banner_wrapper">
+            {% for banner in banners %}
+            <img class="banner_image" src="{{ banner.image.url }}" alt="{{ banner.description }}">
+        {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h1>{{ header }}</h1>
+    </div>
 
 
-    <div><h2>Latest news</h2></div>
+    <div>
+        <h2>Latest news</h2>
+    </div>
     {% include 'news_app/news_article_preview.html' with value=latest_news path=path %}
     <div style="width: 100%; padding: 20px;">
     <h2>Random joke</h2>
-    <p>{{ joke.setup }}</p>
-    <p>{{ joke.punchline}}</p>
+{#    <p>{{ joke.setup }}</p>#}
+{#    <p>{{ joke.punchline}}</p>#}
     </div>
 
     <div style="width: 100%; padding: 20px;">
     <h2>Random cat fact</h2>
-    <p>{{ cat_fact.fact }}</p>
+{#    <p>{{ cat_fact.fact }}</p>#}
+    </div>
+    <div class="sponsors">
+        {% for sponsor in sponsors %}
+            <div class="sponsor_block">
+                <a target="_blank" href="{{ sponsor.website_link }}">
+                    <img src="{{ sponsor.logo }}" alt="{{ sponsor.name }}">
+                </a>
+
+            </div>
+        {% endfor %}
+
     </div>
 
 {% endblock %}

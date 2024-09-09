@@ -6,6 +6,8 @@
 
 {% block main_block %}
     <h1>Privacy Policy</h1>
-    <p>??? what privacy</p>
+    <div>
+        {{ policy.htmltext | safe }}
+    </div>
 
 {% endblock %}

@@ -8,8 +8,12 @@
     <h1>Services</h1>
 
     {% for service in services %}
-        <a href="{{ service.id }}/">{{ service.name }}</a>
-        <br>
+        <div style="padding: 20px; background-color: #fafafa">
+            <a href="{{ service.id }}/">{{ service.name }}</a>
+            <br>
+            <span>{{ service.description }}</span>
+        </div>
+
     {% endfor %}
 
 
