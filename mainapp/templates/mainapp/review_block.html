@@ -3,9 +3,24 @@
         <span style="background: black; color: #f7f7f7">
             {{ review.user_profile.name }} - {{ review.rating }}/5
         </span>
-         <i>
+        <br>
+        <span style="background: black; color: #f7f7f7">
+            Service speed - {{ review.speed_rating }}/5
+        </span>
+        <br>
+        <i>
               - {{ review.created_at }}
          </i>
+        <br>
+        {% if review.is_pleasant_master %}
+            <span>Pleasant service</span>
+            <br>
+        {% endif %}
+        {% if review.is_clean_service %}
+            <span>Clean service</span>
+            <br>
+        {% endif %}
+
     </span>
     <span style="display: block;">{{ review.text }}</span>
 

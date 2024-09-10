@@ -41,7 +41,7 @@ body {
 
 .sidebar ul li {
     width: 100%;
-    padding: 20px
+    padding: 10px
 }
 
 .sidebar ul li a {
@@ -241,4 +241,19 @@ button.remove_btn:hover {
 .login_window {
     padding: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, .05);
+}
+
+table, th, td {
+    border: 1px solid #000000;
+}
+
+.certificate {
+    text-align: center;
+    width: 350px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000000;
+    padding: 30px;
 }

@@ -37,6 +37,9 @@ class Review(models.Model):
     rating = models.IntegerField("Rating from 1 to 5", default=4)
     text = models.TextField("Review text")
     created_at = models.DateTimeField(auto_now=True)
+    speed_rating = models.IntegerField("Service speed rating from 1 to 5", default=4)
+    is_pleasant_master = models.BooleanField("Was master pleasant to communicate with", default=False)
+    is_clean_service = models.BooleanField("Was the job done clean", default=False)
 
     def __str__(self):
         return f"{self.user_profile.name} - {self.rating} of 5"

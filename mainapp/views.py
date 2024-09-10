@@ -82,10 +82,17 @@ def reviews(request):
 @login_required
 def add_review(request):
     rating = request.POST.get('rating')
+    speed_rating = request.POST.get('speed_rating')
+    was_pleasant = True if request.POST.get('was_pleasant') == "on" else False
+    was_clean = True if request.POST.get('was_clean') == "on" else False
     text = request.POST.get('text')
     user = request.user
+
     review = Review()
     review.rating = int(rating)
+    review.speed_rating = speed_rating
+    review.is_pleasant_master = was_pleasant
+    review.is_clean_service = was_clean
     review.text = text
     review.user_profile = UserProfile.objects.filter(user=user).first()
 
@@ -94,6 +101,9 @@ def add_review(request):
         old_review_ = old_review.first()
         old_review_.rating = rating
         old_review_.text = text
+        old_review_.speed_rating = review.speed_rating = speed_rating
+        old_review_.is_pleasant_master = review.is_pleasant_master = was_pleasant
+        old_review_.is_clean_service = review.is_clean_service = was_clean
         old_review_.user_profile = review.user_profile
         old_review_.save()
     else:
@@ -103,12 +113,14 @@ def add_review(request):
 
 
 def random_joke(request):
-    response = requests.get("https://official-joke-api.appspot.com/random_joke")
-    data = response.json()
-    return dict(data)
+    # response = requests.get("https://official-joke-api.appspot.com/random_joke")
+    # data = response.json()
+    # return dict(data)
+    return dict()
 
 
 def random_cat_fact(request):
-    response = requests.get("https://catfact.ninja/fact")
-    data = response.json()
-    return dict(data)
+    # response = requests.get("https://catfact.ninja/fact")
+    # data = response.json()
+    # return dict(data)
+    return dict()
