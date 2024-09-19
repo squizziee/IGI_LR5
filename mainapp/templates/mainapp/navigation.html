@@ -1,49 +1,97 @@
-<aside class="sidebar">
-    <nav>
-        <ul>
-            <li>
-                <a href="{% url 'home' %}" style="padding-right: 10px">Home</a>
-            </li>
-            <li>
-                <a href="{% url 'news' %}" style="padding-right: 10px">News</a>
-            </li>
-            <li>
-                <a href="{% url 'about' %}" style="padding-right: 10px">About us</a>
-            </li>
-            <li>
-                <a href="{% url 'services' %}" style="padding-right: 10px">Services</a>
-            </li>
-            <li>
-                <a href="{% url 'cart_items' %}" style="padding-right: 10px">Cart</a>
-            </li>
-            <li>
-                <a href="{% url 'faq' %}" style="padding-right: 10px">FAQ</a>
-            </li>
-            <li>
-                <a href="{% url 'contacts' %}" style="padding-right: 10px">Contact us</a>
-            </li>
-            <li>
-                <a href="{% url 'coupons' %}" style="padding-right: 10px">Coupons</a>
-            </li>
-            <li>
-                <a href="{% url 'privacy_policy' %}" style="padding-right: 10px">Privacy policy</a>
-            </li>
-            <li>
-                <a href="{% url 'reviews' %}" style="padding-right: 10px">Reviews</a>
-            </li>
-            <li>
-                <a href="{% url 'vacancies' %}" style="padding-right: 10px">Vacancies</a>
-            </li>
-            <li>
-                <a href="{% url 'auth_page' %}" style="padding-right: 10px">Log in</a>
-            </li>
-            <li>
-                <a href="{% url 'order_list' %}" style="padding-right: 10px">Orders</a>
-            </li>
-            <li>
-                <a href="{% url 'master_orders' %}" style="padding-right: 10px">For masters</a>
-            </li>
-        </ul>
-    </nav>
 
-</aside>
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar_button_layer">
+        <div class="btn" id="burger" onclick="moveSidebar()">
+            <div class="strip"></div>
+            <div class="strip"></div>
+        </div>
+    </div>
+    <ul>
+        <li>
+            <a href="{% url 'home' %}" style="padding-right: 10px" onclick="test()">
+                <div class="icon_container">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'news' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-newspaper"></i>
+                </div>News</a>
+        </li>
+        <li>
+            <a href="{% url 'about' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-info"></i>
+                </div>About us</a>
+        </li>
+        <li>
+            <a href="{% url 'services' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-wrench"></i>
+                </div>Services</a>
+        </li>
+        <li>
+            <a href="{% url 'cart_items' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>Cart</a>
+        </li>
+        <li>
+            <a href="{% url 'faq' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-question"></i>
+                </div>FAQ</a>
+        </li>
+        <li>
+            <a href="{% url 'contacts' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-address-card"></i>
+                </div>Contact us</a>
+        </li>
+        <li>
+            <a href="{% url 'coupons' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-tag"></i>
+                </div>Coupons</a>
+        </li>
+        <li>
+            <a href="{% url 'privacy_policy' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-lock"></i>
+                </div>Privacy policy</a>
+        </li>
+        <li>
+            <a href="{% url 'reviews' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-star"></i>
+                </div>Reviews</a>
+        </li>
+        <li>
+            <a href="{% url 'vacancies' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>Vacancies</a>
+        </li>
+        <li>
+            <a href="{% url 'auth_page' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-user"></i>
+                </div>Log in</a>
+        </li>
+        <li>
+            <a href="{% url 'order_list' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>Orders</a>
+        </li>
+        <li>
+            <a href="{% url 'master_orders' %}" style="padding-right: 10px">
+                <div class="icon_container">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>For masters</a>
+        </li>
+    </ul>
+</nav>

@@ -58,6 +58,11 @@ def faqs(request):
     return render(request, 'mainapp/faq/faqs.html', {'faq_list': faq_list})
 
 
+def faq_page(request, faq_id):
+    faq = FAQ.objects.filter(id=faq_id).first()
+    return render(request, 'mainapp/faq/faq_page.html', {'data': faq})
+
+
 def about(request):
     info = CompanyInfo.objects.latest('id')
     return render(request, 'mainapp/about.html', {'info': info})

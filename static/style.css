@@ -18,8 +18,7 @@ body {
 
 .main_footer {
     background-color: #161616;
-    width: 80%;
-    margin-left: 20%;
+    width: 100%;
     height: 300px;
     display: flex;
     align-items: center;
@@ -27,33 +26,8 @@ body {
     color: #ffffff;
 }
 
-.sidebar {
-    position: fixed;
-    width: 20%;
-    height: 100vh;
-    background-color: #262626;
-}
-
-.sidebar ul {
-    width: 100%;
-    height: 100%;
-}
-
-.sidebar ul li {
-    width: 100%;
-    padding: 10px
-}
-
-.sidebar ul li a {
-    text-decoration: none;
-    color: #ffffff;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-}
-
 .content {
-    margin-left: 20%;
-    width: 80%;
+    width: 100%;
 }
 
 q {
@@ -138,7 +112,6 @@ button.add:hover {
 }
 
 .main_banner {
-    position: relative;
     width: 100%;
     overflow: hidden;
     display: flex;

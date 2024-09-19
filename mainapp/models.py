@@ -9,6 +9,7 @@ class FAQ(models.Model):
     question = models.TextField("Question")
     answer = models.TextField("Answer")
     date = models.DateField("Date of answer")
+    teaser = models.TextField("Short Teaser", default="")
 
     def __str__(self):
         return self.question

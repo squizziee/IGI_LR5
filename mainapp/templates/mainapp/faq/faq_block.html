@@ -3,8 +3,9 @@
         font-family: Consolas, sans-serif;
         margin-bottom: 10px;">
     <span style="font-size: 20px; font-weight: bold">{{ value.question }}</span>
-    <span style="color: #cccccc"> - {{ value.date }}</span>
+    <span itemprop="lastReviewed" style="color: #cccccc"> - {{ value.date }}</span>
     <br>
-    <span>{{ value.answer }}</span>
+    <span>{{ value.teaser }}</span>
+    <a itemprop="significantLInk" href="{{ value.id }}">Expand</a>
     <br>
 </div>
