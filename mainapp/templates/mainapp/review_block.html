@@ -1,27 +1,35 @@
+{% load misc %}
 <div class="card">
     <span>
         <span style="background: black; color: #f7f7f7">
-            {{ review.user_profile.name }} - {{ review.rating }}/5
+           {% for i in review_struct.full_stars|times %}
+                <i class="fa-solid fa-star"></i>
+           {% endfor %}
+            {% for i in review_struct.empty_stars|times %}
+                <i class="fa-regular fa-star"></i>
+           {% endfor %}
+            
+            {{ review_struct.review.user_profile.name }}
         </span>
         <br>
         <span style="background: black; color: #f7f7f7">
-            Service speed - {{ review.speed_rating }}/5
+            Service speed - {{ review_struct.review.speed_rating }}/5
         </span>
         <br>
         <i>
-              - {{ review.created_at }}
+              - {{ review_struct.review.created_at }}
          </i>
         <br>
-        {% if review.is_pleasant_master %}
+        {% if review_struct.review.is_pleasant_master %}
             <span>Pleasant service</span>
             <br>
         {% endif %}
-        {% if review.is_clean_service %}
+        {% if review_struct.review.is_clean_service %}
             <span>Clean service</span>
             <br>
         {% endif %}
 
     </span>
-    <span style="display: block;">{{ review.text }}</span>
+    <span style="display: block;">{{ review_struct.review.text }}</span>
 
 </div>

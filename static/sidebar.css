@@ -6,12 +6,14 @@
     margin-left: calc(-300px + 50px + 40px);
     transition: .2s margin-left ease-in-out, .2s background-color ease-in-out, .2s box-shadow ease-in-out;
     z-index: 10;
+    pointer-events: none;
 }
 
 .sidebar.active {
     margin-left: 0;
     background-color: #f7f7f7;
     box-shadow: 0 0 50px rgba(0, 0, 0, .225);
+    pointer-events: all;
 }
 
 .sidebar ul {
@@ -48,7 +50,30 @@
     width: 100%;
     padding: 20px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+
+.sidebar_button_layer .account {
+    width: calc(100% - 50px - 20px);
+    height: 50px;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, .1);
+    text-decoration: none;
+}
+
+.sidebar_button_layer .account .email,
+.sidebar_button_layer .account .sign_in {
+    color: #000000;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+}
+
+.sidebar_button_layer .account .sign_in i {
+    margin-right: 10px;
 }
 
 .sidebar_button_layer .btn {
@@ -59,8 +84,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    box-shadow: 0 0 50px rgba(0, 0, 0, .225);
     transition: .2s box-shadow ease-in-out;
+    pointer-events: all !important;
 }
 
 .sidebar_button_layer .btn .strip {
@@ -69,7 +94,6 @@
     background: #333;
     position: relative;
     transition: .15s background ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
 }
 
 .sidebar_button_layer .btn .strip:nth-child(1)::after,
@@ -94,12 +118,11 @@
 .sidebar_button_layer .btn .strip:nth-child(2)::before { top: 10px; right: 0; }
 
 .sidebar_button_layer .btn.active {
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 50px rgba(0, 0, 0, .1);
 }
 
 .sidebar_button_layer .btn.active .strip {
-    background: #f7f7f7;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+    background: transparent;
 }
 
 .sidebar_button_layer .btn.active .strip:nth-child(1)::after {

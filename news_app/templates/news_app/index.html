@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>News</h1>
+    <div class="heading_container">
+        <h1 class="heading_1">News</h1>
+    </div>
+    <div class="news_wrapper">
+        {% for value in news %}
+            {% include "news_app/news_article_preview.html" with value=value path=value.id %}
+        {% endfor %}
+    </div>
 
-    {% for value in news %}
-        {% include "news_app/news_article_preview.html" with value=value path=value.id %}
-    {% endfor %}
 
 {% endblock %}

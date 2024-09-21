@@ -12,12 +12,6 @@ from service_app.models import Master
 from user_app.models import UserProfile
 
 logger = logging.getLogger(__name__)
-register = template.Library()
-
-
-@register.filter(name='has_group')
-def has_group(user, group_name):
-    return user.groups.filter(name=group_name).exists()
 
 
 def index(request):
@@ -81,7 +75,16 @@ def coupons(request):
 @login_required
 def reviews(request):
     review_list = Review.objects.all()
-    return render(request, 'mainapp/reviews.html', {'reviews': review_list})
+    review_list_ext = []
+    for review in review_list:
+        review_list_ext.append(
+            {
+                'review': review,
+                'full_stars': review.rating,
+                'empty_stars': 5 - review.rating
+            }
+        )
+    return render(request, 'mainapp/reviews.html', {'reviews': review_list_ext})
 
 
 @login_required
@@ -118,14 +121,12 @@ def add_review(request):
 
 
 def random_joke(request):
-    # response = requests.get("https://official-joke-api.appspot.com/random_joke")
-    # data = response.json()
-    # return dict(data)
-    return dict()
+    response = requests.get("https://official-joke-api.appspot.com/random_joke")
+    data = response.json()
+    return dict(data)
 
 
 def random_cat_fact(request):
-    # response = requests.get("https://catfact.ninja/fact")
-    # data = response.json()
-    # return dict(data)
-    return dict()
+    response = requests.get("https://catfact.ninja/fact")
+    data = response.json()
+    return dict(data)

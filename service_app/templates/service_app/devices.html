@@ -5,12 +5,17 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Devices</h1>
+    <div class="heading_container">
+        <h1 class="heading_1">Devices</h1>
+    </div>
 
-    {% for device in devices %}
-        <a href="{{ device.id }}/masters">{{ device.name }}</a>
-        <br>
-    {% endfor %}
+    <div class="service_wrapper">
+        {% for device in devices %}
+            <div class="flat_container_padding">
+                <a href="{{ device.id }}/masters">{{ device.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
 
 
 {% endblock %}

@@ -35,8 +35,8 @@
         <br>
         <button type="submit">Add review</button>
     </form>
-    {% for review in reviews %}
-        {% include 'mainapp/review_block.html' with review=review %}
+    {% for review_struct in reviews %}
+        {% include 'mainapp/review_block.html' with review_struct=review_struct %}
     {% endfor %}
 
 {% endblock %}

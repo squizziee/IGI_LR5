@@ -1,6 +1,19 @@
 
 <nav class="sidebar" id="sidebar">
     <div class="sidebar_button_layer">
+        <a class="account" href="{% url 'auth_page' %}">
+            {% if request.user.email == None %}
+                 <span class="sign_in">
+                    <i class="fa-solid fa-door-open"></i>
+                    Sign in
+                </span>
+            {% else %}
+                <span class="email">
+                    {{ request.user.email }}
+                </span>
+
+            {% endif %}
+        </a>
         <div class="btn" id="burger" onclick="moveSidebar()">
             <div class="strip"></div>
             <div class="strip"></div>
@@ -8,7 +21,7 @@
     </div>
     <ul>
         <li>
-            <a href="{% url 'home' %}" style="padding-right: 10px" onclick="test()">
+            <a href="{% url 'home' %}" style="padding-right: 10px">
                 <div class="icon_container">
                     <i class="fa-solid fa-house"></i>
                 </div>
@@ -74,12 +87,6 @@
                 <div class="icon_container">
                     <i class="fa-solid fa-dollar-sign"></i>
                 </div>Vacancies</a>
-        </li>
-        <li>
-            <a href="{% url 'auth_page' %}" style="padding-right: 10px">
-                <div class="icon_container">
-                    <i class="fa-solid fa-user"></i>
-                </div>Log in</a>
         </li>
         <li>
             <a href="{% url 'order_list' %}" style="padding-right: 10px">

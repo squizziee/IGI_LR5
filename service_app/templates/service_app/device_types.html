@@ -5,12 +5,17 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Device types</h1>
+    <div class="heading_container">
+        <h1 class="heading_1">Device types</h1>
+    </div>
 
-    {% for device_type in device_types %}
-        <a href="{{ device_type.id }}/">{{ device_type.name }}</a>
-        <br>
-    {% endfor %}
+    <div class="service_wrapper">
+        {% for device_type in device_types %}
+            <div class="flat_container_padding">
+                <a href="{{ device_type.id }}/">{{ device_type.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
 
 
 {% endblock %}

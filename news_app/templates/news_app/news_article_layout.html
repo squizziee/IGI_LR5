@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block main_block %}
-    <div style=" width: 100%; height: 50vh; overflow: hidden">
-        <img src="{{ news.cover.url }}" alt="Cover image" style="width: 100%">
+    <div class="news_article_wrapper">
+        <div class="flat_container">
+            <img class="news_article_image" src="{{ news.cover.url }}" alt="Cover image" style="width: 100%">
+        </div>
+        <h2 class="heading_2">{{ news.title }}</h2>
+        <br>
+        <span class="news_article_author">by {{ news.author }}, {{ news.date }}</span>
+        <p class="news_article_text">{{ news.text }}</p>
     </div>
-    <h3>{{ news.title }}</h3>
-    <br>
-    <span>by {{ news.author }}, {{ news.date }}</span>
-    <p>{{ news.text }}</p>
+
 
 
 {% endblock %}

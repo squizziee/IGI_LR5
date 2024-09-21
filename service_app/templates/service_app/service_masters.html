@@ -5,24 +5,25 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Service masters</h1>
-
-    {% for master in master_list %}
-        <div>
-            <span>Master {{ master.name }}</span>
-            <form action="{% url 'add_to_cart' %}" method="post">
-                <input type="text" hidden value="{{ hbvjhv }}" name="appointment_id">
-                <input type="text" hidden name="service_type" value="{{ service_type.id }}">
-                <input type="text" hidden name="service" value="{{ service.id }}">
-                <input type="text" hidden name="device_type" value="{{ device_type.id }}">
-                <input type="text" hidden name="device" value="{{ device.id }}">
-                <input type="text" hidden name="master" value="{{ master.id }}">
-                {% csrf_token %}
-                <button type="submit">Add to cart</button>
-            </form>
-        </div>
-        <br>
-    {% endfor %}
+    <div class="heading_container">
+        <h1 class="heading_1">Service masters</h1>
+    </div>
+    <div class="service_wrapper">
+        {% for master in master_list %}
+            <div class="flat_container_padding">
+                <span>Master {{ master.name }}</span>
+                <form action="{% url 'add_to_cart' %}" method="post">
+                    <input type="hidden" name="service_type" value="{{ service_type.id }}">
+                    <input type="hidden" name="service" value="{{ service.id }}">
+                    <input type="hidden" name="device_type" value="{{ device_type.id }}">
+                    <input type="hidden" name="device" value="{{ device.id }}">
+                    <input type="hidden" name="master" value="{{ master.id }}">
+                    {% csrf_token %}
+                    <button type="submit">Add to cart</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
 
 
 {% endblock %}

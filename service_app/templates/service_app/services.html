@@ -5,16 +5,19 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Services</h1>
+    <div class="heading_container">
+        <h1 class="heading_1">Services</h1>
+    </div>
 
-    {% for service in services %}
-        <div style="padding: 20px; background-color: #fafafa">
-            <a href="{{ service.id }}/">{{ service.name }}</a>
-            <br>
-            <span>{{ service.description }}</span>
-        </div>
-
-    {% endfor %}
+    <div class="service_wrapper">
+        {% for service in services %}
+            <div class="flat_container_padding">
+                <a href="{{ service.id }}/">{{ service.name }}</a>
+                <br>
+                <span>{{ service.description }}</span>
+            </div>
+        {% endfor %}
+    </div>
 
 
 {% endblock %}
