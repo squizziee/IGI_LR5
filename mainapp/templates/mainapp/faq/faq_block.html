@@ -1,11 +1,12 @@
-<div style="background-color: #f7f7f7;
-        padding: 20px;
-        font-family: Consolas, sans-serif;
-        margin-bottom: 10px;">
-    <span style="font-size: 20px; font-weight: bold">{{ value.question }}</span>
-    <span itemprop="lastReviewed" style="color: #cccccc"> - {{ value.date }}</span>
-    <br>
-    <span>{{ value.teaser }}</span>
-    <a itemprop="significantLInk" href="{{ value.id }}">Expand</a>
-    <br>
+<div class="flat_container">
+    <div class="flat_container_header">
+        <strong class="flat_container_heading_text">{{ value.question }}</strong>
+    </div>
+    <div class="flat_container_body">
+        <span class="flat_container_emphasis_text" itemprop="lastReviewed">{{ value.date }}</span>
+        <br>
+        <span class="flat_container_default_text" itemprop="teaser">{{ value.teaser }}</span>
+        <br>
+        <a class="btn_general" itemprop="significantLink" href="{{ value.id }}">Expand</a>
+    </div>
 </div>

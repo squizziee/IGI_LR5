@@ -5,8 +5,11 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>{{ data.question }}</h1>
-    <p>
+    <div class="heading_container">
+        <h1 class="heading_1">{{ data.question }}</h1>
+    </div>
+
+    <p style="font-family: 'Roboto', sans-serif">
         {{ data.answer }}
     </p>
 

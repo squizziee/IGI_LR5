@@ -1,5 +1,9 @@
-<div class="card">
-    <span style="background: black; color: #f7f7f7">{{ coupon.service.name }} - {{ coupon.discount }}% discount</span>
-    <span style="display: block;">Promocode: {{ coupon.promocode }}</span>
-
+<div class="flat_container">
+    <div class="flat_container_header">
+         <span class="flat_container_heading_text">{{ coupon.discount }}% discount</span>
+    </div>
+    <div class="flat_container_body">
+        <span class="flat_container_emphasis_text_light">{{ coupon.service.name }}t</span>
+        <span class="flat_container_emphasis_text">{{ coupon.promocode }}</span>
+    </div>
 </div>

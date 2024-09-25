@@ -4,11 +4,12 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Vacancies</h1>
-    {% for vacancy in vacancies %}
-        {% include 'vacancy_app/vacancy_list_block.html' with vacancy=vacancy %}
-    {% endfor %}
-
-
-
+    <div class="heading_container">
+        <h1 class="heading_1">Vacancies</h1>
+    </div>
+    <div class="service_wrapper_2">
+        {% for vacancy in vacancies %}
+            {% include 'vacancy_app/vacancy_list_block.html' with vacancy=vacancy %}
+        {% endfor %}
+    </div>
 {% endblock %}

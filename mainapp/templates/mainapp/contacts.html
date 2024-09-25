@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Contacts</h1>
-    {% for contact in contact_list %}
+    <div class="heading_container">
+        <h1 class="heading_1">Contacts</h1>
+    </div>
+    <div class="service_wrapper">
+        {% for contact in contact_list %}
         {% include 'mainapp/contact_block.html' with contact=contact %}
     {% endfor %}
-
-
+    </div>
 {% endblock %}

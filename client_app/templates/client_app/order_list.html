@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Orders</h1>
-    <div>
+    <div class="heading_container">
+        <h1 class="heading_1">Orders</h1>
+    </div>
+    <div class="service_wrapper_2">
         {% for order in orders %}
             {% include 'client_app/order_list_block.html' with order=order.order entries=order.entries %}
         {% endfor %}

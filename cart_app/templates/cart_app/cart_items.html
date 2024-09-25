@@ -5,16 +5,24 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Cart items</h1>
-
-    {% for item in items %}
-        {% include 'cart_app/cart_item_block.html' with item=item index=item.index %}
-    {% endfor %}
-    <div style="display: flex; justify-content: center; width: 100%">
+    <div class="heading_container">
+        <h1 class="heading_1">Cart items</h1>
+    </div>
+    <div class="service_wrapper_2">
+        {% for item in items %}
+            {% include 'cart_app/cart_item_block.html' with item=item index=item.index %}
+        {% endfor %}
+    </div>
+    <div style="display: flex; justify-content: center; width: 100%;">
         <form action="{% url 'cart_checkout' %}" method="post">
             {% csrf_token %}
             <input type="text" hidden name="items" value="{{ item_ids }}">
-            <button class="checkout_btn" type="submit">Checkout</button>
+            {% if is_empty_cart %}
+                <span class="empty_cart_message">Cart is empty :(</span>
+            {% else %}
+                <button style="margin-top: 50px" class="btn_general" type="submit">Checkout</button>
+            {% endif %}
+
         </form>
     </div>
 

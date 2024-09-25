@@ -5,9 +5,13 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Coupons</h1>
-    {% for coupon in coupons %}
-        {% include 'mainapp/coupon_block.html' with coupon=coupon %}
-    {% endfor %}
+    <div class="heading_container">
+        <h1 class="heading_1">Coupons</h1>
+    </div>
+    <div class="service_wrapper_5">
+        {% for coupon in coupons %}
+            {% include 'mainapp/coupon_block.html' with coupon=coupon %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

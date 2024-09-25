@@ -1,7 +1,12 @@
-<div class="card">
-    <span style="background-color: black; color: #f7f7f7">{{ vacancy.speciality.name }} - {{ vacancy.experience_in_years }} years of experience</span>
-    {% for service in vacancy.speciality.services.all %}
-        <span style="display: block">{{ service.name }}</span>
-    {% endfor %}
-
+<div class="flat_container">
+    <div class="flat_container_header">
+        <span class="flat_container_heading_text">{{ vacancy.speciality.name }}</span>
+    </div>
+    <div class="flat_container_body">
+        <span class="flat_container_emphasis_text">{{ vacancy.experience_in_years }} years of experience</span>
+        <br>
+        {% for service in vacancy.speciality.services.all %}
+            <span class="flat_container_emphasis_text_light">{{ service.name }}</span>
+        {% endfor %}
+    </div>
 </div>

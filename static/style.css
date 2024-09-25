@@ -28,15 +28,77 @@ body {
     color: #ffffff;
 }
 
-*[class^="flat_container"] {
+/* Used with two-block containers */
+
+.flat_container {
     border-radius: 24px;
     background-color: #ffffff;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .07);
     overflow: hidden;
 }
 
-.flat_container_padding {
+.flat_container > .flat_container_header {
+    width: 100%;
     padding: 20px;
+    background-color: #eeeeee;
+}
+
+.flat_container > .flat_container_double_header {
+    width: 100%;
+    background-color: #eeeeee;
+    display: flex;
+}
+
+.flat_container > .flat_container_double_header > .left {
+    width: calc(100% - 200px);
+}
+
+.flat_container > .flat_container_double_header > .right {
+    width: 200px;
+}
+
+.flat_container > .flat_container_body {
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+/* Used with two-block containers */
+
+.flat_container_padding {
+    border-radius: 24px;
+    background-color: #ffffff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .07);
+    overflow: hidden;
+    padding: 20px;
+}
+
+.flat_container_heading_text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 25px;
+}
+
+*[class^="flat_container_emphasis_text"] {
+    display: inline-block;
+    padding: 3px 6px;
+    background-color: #000000;
+    border-radius: 6px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.flat_container_emphasis_text_light {
+    background-color: #eeeeee;
+    color: #000000;
+}
+
+.flat_container_default_text {
+    font-family: "Roboto", sans-serif;
 }
 
 q {
@@ -125,23 +187,29 @@ q {
     font-size: 40px;
 }
 
-button.add {
+.btn_general {
+    display: inline-block;
     outline: none;
-    padding: 5px 10px;
-    border-radius: 0;
-    border: 3px solid black;
-    background-color: transparent;
-    font-family: Consolas, sans-serif;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    background-color: #eeeeee;
+    font-family: "Roboto", sans-serif;
     font-weight: bold;
-    margin-top: 10px;
-    margin-right: 10px;
     transition: .2s ease-in-out;
     cursor: pointer;
+    text-decoration: none;
+    color: #000000;
 }
 
-button.add:hover {
+.btn_general:hover {
     background-color: black;
     color: #f7f7f7;
+}
+
+.flat_container * + form > .btn_general,
+.flat_container * + .btn_general {
+    margin-top: 10px;
 }
 
 .card {
@@ -371,4 +439,39 @@ table, th, td {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
+}
+
+.service_wrapper_2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.service_wrapper_5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+}
+
+.faq_block_wrapper {
+
+}
+
+.faq_block_wrapper > strong {
+    font-family: "Montserrat", sans-serif;
+}
+
+.faq_block_wrapper > *[itemprop="teaser"] {
+    font-family: "Roboto", sans-serif
+}
+
+.faq_block_wrapper > *[itemprop="lastReviewed"] {
+    font-family: "Roboto", sans-serif
+}
+
+.empty_cart_message {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 780;
+    color: rgba(0, 0, 0, .1);
+    font-size: 50px;
 }

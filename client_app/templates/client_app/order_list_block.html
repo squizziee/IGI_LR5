@@ -1,15 +1,21 @@
-<div style="background-color: #f7f7f7; font-family: Consolas, sans-serif; padding: 20px; margin-bottom: 15px; position: relative">
+<div class="flat_container" style="position: relative">
     {% if order.is_cancelled %}
         <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .7);"></div>
     {% endif %}
-    <span style="background-color: black; color: #f7f7f7">{{ order.application_date }} - ${{ order.total | floatformat:-2}}</span>
-    {% for entry in entries %}
-        <span style="display: block">{{ entry.service.name }} - {{ entry.status }} - ${{ entry.count_total }}</span>
-    {% endfor %}
-
-    <form action="{% url 'cancel_order' %}" method="post">
-        {% csrf_token %}
-        <input type="text" hidden name="order_id" value="{{ order.id }}">
-        <button class="remove_btn" type="submit">Cancel</button>
-    </form>
+    <div class="flat_container_header">
+        <span class="flat_container_heading_text">{{ order.application_date }} - ${{ order.total | floatformat:-2}}</span>
+    </div>
+    <div class="flat_container_body">
+        {% for entry in entries %}
+            <span class="flat_container_default_text">{{ entry.service.name }}</span>
+            <span class="flat_container_emphasis_text_light">{{ entry.status }}</span>
+            <span class="flat_container_emphasis_text">${{ entry.count_total }}</span>
+            <br>
+        {% endfor %}
+        <form action="{% url 'cancel_order' %}" method="post">
+            {% csrf_token %}
+            <input type="text" hidden name="order_id" value="{{ order.id }}">
+            <button class="btn_general" type="submit">Cancel</button>
+        </form>
+    </div>
 </div>

@@ -1,11 +1,20 @@
-<div class="card">
-    <div class="master_image" style='background-image: url({{ contact.photo.url }}); '></div>
-    <div>
-        <span style="background: black; color: #f7f7f7">{{ contact.name }} - {{ contact.experience }} years of experience</span>
-        <span style="display: block;">Email: {{ contact.email }}</span>
+<div class="flat_container">
+    <div class="flat_container_double_header">
+        <div class="left" style="padding: 20px">
+            <span class="flat_container_heading_text">{{ contact.name }}</span>
+            <br>
+            <span style="margin-top: 5px" class="flat_container_emphasis_text">{{ contact.email }}</span>
+            <span class="flat_container_emphasis_text">{{ contact.experience }} years of experience</span>
+        </div>
+        <div class="right">
+            <div class="master_image" style='background-image: url({{ contact.photo.url }}); '></div>
+        </div>
+    </div>
+
+    <div class="flat_container_body">
         {% for service in contact.services %}
-            <span style="display: block; font-weight: bold">{{ service.name }}:</span>
-            <span style="display: block; padding-left: 20px;">- {{ service.description }}</span>
+            <span style="display: block;" class="flat_container_emphasis_text_light">{{ service.name }}:</span>
+            <span class="flat_container_default_text">- {{ service.description }}</span>
         {% endfor %}
     </div>
 </div>

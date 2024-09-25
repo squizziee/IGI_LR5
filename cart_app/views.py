@@ -85,7 +85,8 @@ def cart_items(request):
         items = _deserialize_entries(request)
     except:
         pass
-    return render(request, 'cart_app/cart_items.html', {'items': items, 'item_ids': []})
+    return render(request, 'cart_app/cart_items.html', {'items': items, 'item_ids': [],
+                                                        'is_empty_cart': len(items) == 0})
 
 
 def cart_checkout(request):
@@ -95,7 +96,7 @@ def cart_checkout(request):
 
 def _count_total(entries, coupon):
     total = 0.0
-    if coupon.is_active:
+    if coupon is not None and coupon.is_active:
         for entry in entries:
             if entry.service == coupon.service:
                 total += entry.service.base_price_in_usd * (1 - coupon.discount / 100)
@@ -151,7 +152,7 @@ def create_order(request):
     promocode = request.POST.get('promocode')
     coupon = Coupon.objects.filter(promocode=promocode).first()
 
-    if Coupon is not None:
+    if coupon is not None:
         coupon.is_active = False
         coupon.save()
 

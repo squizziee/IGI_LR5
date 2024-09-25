@@ -11,10 +11,13 @@
 
     <div class="service_wrapper">
         {% for service in services %}
-            <div class="flat_container_padding">
-                <a href="{{ service.id }}/">{{ service.name }}</a>
-                <br>
-                <span>{{ service.description }}</span>
+            <div class="flat_container">
+                <div class="flat_container_header">
+                    <a class="flat_container_heading_text" href="{{ service.id }}/">{{ service.name }}</a>
+                </div>
+                <div class="flat_container_body">
+                    <span class="flat_container_default_text">{{ service.description }}</span>
+                </div>
             </div>
         {% endfor %}
     </div>

@@ -12,7 +12,7 @@
     <div class="service_wrapper">
         {% for device in devices %}
             <div class="flat_container_padding">
-                <a href="{{ device.id }}/masters">{{ device.name }}</a>
+                <a class="flat_container_heading_text" href="{{ device.id }}/masters">{{ device.name }}</a>
             </div>
         {% endfor %}
     </div>

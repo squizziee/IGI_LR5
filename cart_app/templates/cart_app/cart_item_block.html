@@ -1,13 +1,17 @@
-<div style="background-color: #f7f7f7; font-family: Consolas, sans-serif; padding: 20px; margin-bottom: 15px">
-    <span style="font-weight: bold">{{ item.service_type.name }} - {{ item.service.name }} - ${{ item.service.base_price_in_usd }}</span>
-    <br>
-    <span style="background-color: black; color: #f7f7f7">{{ item.device_type.name }} {{ item.device.name }}</span>
-    <br>
-    <span>Will be performed by {{ item.master.name }}, {{ item.master.experience_in_years }} years of experience</span>
-    <br>
-    <form action="{% url 'remove_from_cart' %}" method="post">
-        {% csrf_token %}
-        <input type="text" hidden name="order_entry_id" value="{{ item.index }}">
-        <button class="remove_btn" type="submit">Remove from cart</button>
-    </form>
+<div class="flat_container">
+    <div class="flat_container_header">
+        <span class="flat_container_heading_text">{{ item.service_type.name }} - {{ item.service.name }} - ${{ item.service.base_price_in_usd }}</span>
+    </div>
+    <div class="flat_container_body">
+        <span class="flat_container_emphasis_text">{{ item.device_type.name }}</span>
+        <span class="flat_container_emphasis_text">{{ item.device.name }}</span>
+        <br>
+        <span class="flat_container_default_text">Will be performed by {{ item.master.name }}, {{ item.master.experience_in_years }} years of experience</span>
+        <form action="{% url 'remove_from_cart' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="order_entry_id" value="{{ item.index }}">
+            <button class="btn_general" type="submit">Remove from cart</button>
+        </form>
+    </div>
+
 </div>

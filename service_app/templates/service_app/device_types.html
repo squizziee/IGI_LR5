@@ -9,10 +9,10 @@
         <h1 class="heading_1">Device types</h1>
     </div>
 
-    <div class="service_wrapper">
+    <div class="service_wrapper_5">
         {% for device_type in device_types %}
             <div class="flat_container_padding">
-                <a href="{{ device_type.id }}/">{{ device_type.name }}</a>
+                <a class="flat_container_heading_text" href="{{ device_type.id }}/">{{ device_type.name }}</a>
             </div>
         {% endfor %}
     </div>
