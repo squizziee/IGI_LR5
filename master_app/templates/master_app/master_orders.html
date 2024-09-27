@@ -1,136 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Master orders</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0 !important;
-        }
-
-        .horizontal_navigation {
-            background-color: #262626;
-        }
-
-        .horizontal_navigation ul {
-            display: flex;
-            list-style: none;
-            width: 100%;
-        }
-
-        .horizontal_navigation ul li {
-            padding: 20px
-        }
-
-        .horizontal_navigation ul li a {
-            text-decoration: none;
-            color: #ffffff;
-            font-family: "Roboto", sans-serif;
-            font-weight: 500;
-        }
-
-        button.control_btn {
-            outline: none;
-            padding: 5px 10px;
-            border-radius: 0;
-            border: 4px solid black;
-            background-color: transparent;
-            font-family: Consolas, sans-serif;
-            font-weight: bold;
-            margin-top: 10px;
-            margin-right: 10px;
-            transition: .2s ease-in-out;
-            cursor: pointer;
-        }
-
-        button.control_btn:hover {
-            background-color: black;
-            color: #f7f7f7;
-        }
-
-        button.done {
-            border-color: #98FB98;
-            color: #98FB98;
-        }
-
-        button.done:hover {
-            background-color: #98fb98;
-        }
-
-        button.accept.inactive {
-            border-color: transparent;
-            pointer-events: none;
-        }
-
-        .card {
-            background-color: #f7f7f7;
-            font-family: Consolas, sans-serif;
-            padding: 20px;
-            margin: 0 15px 15px 15px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, .1);
-            position: relative;
-        }
-    </style>
-</head>
-<body>
-<nav class="horizontal_navigation">
-    <ul>
-        <li>
-            <a href="http://127.0.0.1:8000/" style="padding-right: 10px">Home</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/news/" style="padding-right: 10px">News</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/about/" style="padding-right: 10px">About us</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/services/" style="padding-right: 10px">Services</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/cart/" style="padding-right: 10px">Cart</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/faq/" style="padding-right: 10px">FAQ</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/contacts/" style="padding-right: 10px">Contact us</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/coupons/" style="padding-right: 10px">Coupons</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/privacy_policy/" style="padding-right: 10px">Privacy policy</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/review/" style="padding-right: 10px">Reviews</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/auth/" style="padding-right: 10px">Log in</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/client/" style="padding-right: 10px">Orders</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/master/" style="padding-right: 10px">For masters</a>
-        </li>
-    </ul>
-</nav>
-<h1>Order entries</h1>
-<div>
-    {% for entry in entries %}
-        {% include 'master_app/master_order_block.html' with item=entry %}
-    {% endfor %}
-</div>
-</body>
-</html>
+{% extends 'mainapp/layout.html' %}
+{% block title_block %}
+    Log in
+{% endblock %}
+{% block main_block %}
+    <div class="heading_container">
+        <h1 class="heading_1">Order entries</h1>
+    </div>
+    <div class="service_wrapper_2">
+        {% for entry in entries %}
+            {% include 'master_app/master_order_block.html' with item=entry %}
+        {% endfor %}
+    </div>
+{% endblock %}
 
 
 

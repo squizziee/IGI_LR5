@@ -4,41 +4,38 @@
 {% endblock %}
 {% block main_block %}
     <div class="login_container">
-        <div class="login_window">
-            <div>
+        <div class="flat_container login_window">
+            <div class="flat_container_header">
+                <h1 class="flat_container_heading_text">Log in</h1>
+            </div>
+            <div class="flat_container_body">
                 <!-- Login form -->
                 {% if request.user.is_authenticated %}
-                    <span>{{ request.user.email }}</span>
+                    <span class="flat_container_emphasis_text" style="display: block">{{ request.user.email }}</span>
                     <form action="{% url 'log_out' %}" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">Log out</button>
+                        <button type="submit" class="btn_general">Log out</button>
                     </form>
                 {% else %}
                     <form method="post" enctype="multipart/form-data">
-                        <h1>Log in</h1>
-
                         {% csrf_token %} <!-- CSRF token for security -->
 
                         {% if messages %}
-                        <div role="alert">
-                            {% for message in messages %}
-                            {{ message }}
-                            {% endfor %}
-                        </div>
+                            <div role="alert">
+                                {% for message in messages %}
+                                    {{ message }}
+                                {% endfor %}
+                            </div>
                         {% endif %}
 
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Username</label>
-                            <input type="text" class="form-control" name="username" id="exampleInputEmail1"
-                                placeholder="Enter username" required>
-                        </div>
+                        <label for="exampleInputEmail1" class="flat_container_emphasis_text_light">Username</label>
+                        <input type="text" class="form-control" name="username" id="exampleInputEmail1"
+                               placeholder="Enter username" required>
 
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
-                        </div>
+                        <label for="exampleInputPassword1" class="flat_container_emphasis_text_light">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
 
-                        <button type="submit" class="btn btn-primary">Log in</button>
+                        <button type="submit" class="btn_general">Log in</button>
                     </form>
                 {% endif %}
             </div>

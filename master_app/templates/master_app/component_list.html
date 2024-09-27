@@ -4,17 +4,23 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Present components</h1>
+    <div class="heading_container">
+        <h1 class="heading_1">Present components</h1>
+    </div>
     <div>
-        {% for present_component in present_components %}
-            {% include 'master_app/present_component_list_block.html' with component=present_component entry_id=entry_id %}
-        {% endfor %}
-    <h1>All components</h1>
-    <div style="background-color: #f7f7f7; font-family: Consolas, sans-serif; padding: 20px; margin: 0 15px 15px 15px; box-shadow: 0 0 30px rgba(0, 0, 0, .1);">
+        <div class="service_wrapper">
+            {% for present_component in present_components %}
+                {% include 'master_app/present_component_list_block.html' with component=present_component entry_id=entry_id %}
+            {% endfor %}
+        </div>
+    <div class="heading_container_symmetrical">
+        <h1 class="heading_1">All components</h1>
+    </div>
+    <div class="flat_container_padding">
         <form action="{% url 'component_list' %}" method="get">
-            <input type="text" name="search_query">
-            <input type="text" hidden name="entry_id" value="{{ entry_id }}">
-            <button type="submit">Search</button>
+            <input class="input_general" type="text" name="search_query" placeholder="Search query">
+            <input type="hidden" name="entry_id" value="{{ entry_id }}">
+            <button type="submit" class="btn_general">Search</button>
         </form>
     </div>
 

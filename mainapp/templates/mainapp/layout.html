@@ -14,10 +14,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'media.css' %}">
     <script src="https://kit.fontawesome.com/bd14ceb501.js" crossorigin="anonymous"></script>
     <title>{% block title_block %}{% endblock %}</title>
 </head>
 <body>
+    <div class="preloader_container" id="preloader">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <div class="wrapper">
         {% include 'mainapp/navigation.html' %}
         <header class="main_header">

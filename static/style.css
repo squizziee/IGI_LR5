@@ -40,7 +40,8 @@ body {
 .flat_container > .flat_container_header {
     width: 100%;
     padding: 20px;
-    background-color: #eeeeee;
+    /*background-color: #eeeeee;*/
+    background-image: linear-gradient(315deg, #eeeeee, #F7F7F7, #eeeeee);
 }
 
 .flat_container > .flat_container_double_header {
@@ -98,6 +99,7 @@ body {
 }
 
 .flat_container_default_text {
+    word-break: break-word;
     font-family: "Roboto", sans-serif;
 }
 
@@ -220,8 +222,58 @@ q {
     box-shadow: 0 0 30px rgba(0, 0, 0, .1);
 }
 
-.main_info {
-    padding: 20px;
+.privacy_policy > :is(h1, h2, h3, h4, h5, h6) {
+    font-family: "Montserrat", sans-serif;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.privacy_policy p,
+.privacy_policy ul{
+    font-family: "Roboto", sans-serif;
+    line-height: 30px;
+}
+
+.privacy_policy ul li::marker {
+    content: "+ ";
+}
+
+.main_info ul li::marker {
+    content: '✝ ';
+}
+
+.main_info p::first-letter {
+    font-size: 30px;
+    color: firebrick;
+}
+
+.main_info p {
+    word-spacing: 10px;
+    word-break: break-word;
+    word-wrap: break-word;
+    letter-spacing: 1px;
+    text-indent: 20px;
+    font-family: "Roboto", sans-serif;
+}
+
+::selection {
+    color: #ffffff;
+    background: #000000;
+}
+
+.main_info q {
+    font-family: "Montserrat", sans-serif;
+    font-variant: all-petite-caps;
+}
+
+.main_info q:lang(en)::before,
+.main_info q:lang(en)::after {
+    content: "\"";
+}
+
+.main_info q:lang(ru)::before,
+.main_info q:lang(ru)::after {
+    content: "\'";
 }
 
 .master_image {
@@ -398,8 +450,29 @@ button.remove_btn:hover {
 }
 
 .login_window {
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .05);
+    width: 500px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login_window input {
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #f7f7f7;
+    font-family: "Roboto", sans-serif;
+    border-radius: 6px;
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.login_window label {
+    font-family: "Roboto", sans-serif;
+    display: block;
+    margin-bottom: 5px;
 }
 
 table, th, td {
@@ -407,14 +480,70 @@ table, th, td {
 }
 
 .certificate {
+    position: relative;
     text-align: center;
-    width: 350px;
-    height: 600px;
+    width: 300px;
+    height: 510px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #000000;
     padding: 30px;
+}
+
+.certificate_content {
+    padding: 20px;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    position: absolute;
+    z-index: 5;
+    top: 2px;
+    left: 3px;
+    background-image: radial-gradient(circle, rgba(139,85,73,1) 0%, rgba(23,7,5,1) 30%, rgba(245,121,95,1) 100%);
+}
+
+.certificate_content > .certificate_heading {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.certificate_content > .certificate_company {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-variant: small-caps slashed-zero common-ligatures;
+    font-weight: 600;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.certificate_content > .certificate_text {
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-variant: all-petite-caps;
+    font-size: 12px;
+    text-align: justify-all;
+    display: block;
+    margin-bottom: 50px;
+}
+.certificate_content > .certificate_bottom_text {
+    font-family: "Roboto", sans-serif;
+    font-variant: all-petite-caps;
+    font-size: 12px;
+    text-align: justify-all;
+    display: block;
+    margin-bottom: 30px;
+    background-color: #f7f7f7;
+    padding: 10px;
+}
+
+
+.certificate > .frame {
+    position: absolute;
+    z-index: 2;
 }
 
 *[class^="news_article"] {
@@ -474,4 +603,232 @@ table, th, td {
     font-weight: 780;
     color: rgba(0, 0, 0, .1);
     font-size: 50px;
+}
+
+.input_general {
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #f7f7f7;
+    font-family: "Roboto", sans-serif;
+    border-radius: 6px;
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.input_general:required {
+    animation: 2s pulse ease-in-out;
+}
+
+.input_general:required:nth-child(n) {
+    animation: 2s pulse ease-in-out;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scaleX(105%);
+    }
+}
+
+.fun_table {
+    width: 100%;
+    height: 500px;
+    border-collapse: collapse;
+    empty-cells: show;
+    font-family: "Roboto", sans-serif;
+}
+
+.fun_table td:empty {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.fun_table td:nth-child(2n) {
+    text-align: right;
+    background-color: lightpink;
+}
+
+.fun_table td:nth-child(2n + 1) {
+    vertical-align: bottom;
+}
+
+.fun_table > thead {
+    background-color: #cccccc;
+}
+
+.preloader_container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 999;
+    background-color: #f7f7f7;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.preloader {
+    width: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    transition: .3s opacity ease-in-out;
+}
+
+.preloader.ready {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader > div {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #000000;
+}
+
+.preloader > div:nth-child(1) {
+    animation: 1s bounce ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+.preloader > div:nth-child(2) {
+    animation: 1s bounce ease-in-out infinite;
+    animation-delay: .1s;
+}
+
+.preloader > div:nth-child(3) {
+    animation: 1s bounce ease-in-out infinite;
+    animation-delay: .2s;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-100%);
+    }
+    80% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.main_animation {
+    position: relative;
+    display: flex;
+    padding: 50px;
+}
+
+.main_animation .laptop {
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    background-position: center;
+    animation: 10s laptop_animation ease-in-out;
+}
+
+.main_animation .phone {
+    z-index: 5;
+    transform: translate(-20%, 50%) rotateZ(-35deg);
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-position: center;
+    animation: 10s phone_animation ease-in-out;
+}
+
+.main_animation .wand {
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-position: center;
+    transform: rotateZ(-45deg);
+    animation: 10s wand_animation ease-in-out;
+}
+
+@keyframes laptop_animation {
+    0% {
+        background-image: url("laptop.png");
+    }
+    40% {
+        filter: opacity(1) blur(0);
+    }
+    50% {
+         filter: opacity(0) blur(100px);
+    }
+    100% {
+        background-image: url("laptop_fixed.png");
+    }
+}
+
+@keyframes phone_animation {
+    0% {
+        background-image: url("smartphone.png");
+    }
+    40% {
+        filter: opacity(1) blur(0);
+    }
+    50% {
+         filter: opacity(0) blur(100px);
+    }
+    100% {
+        background-image: url("phone_fixed.png");
+    }
+}
+
+@keyframes wand_animation {
+    0% {
+        transform: rotateZ(-45deg);
+    }
+    25% {
+        transform: rotateZ(-90deg);
+    }
+    50% {
+        transform: rotateZ(-90deg) translate(-75%, -75%);
+    }
+}
+
+.review_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.review {
+    width: 500px;
+}
+
+.review textarea {
+    width: 100%;
+    min-height: 200px;
+    resize: none;
+}
+
+.review textarea:focus {
+    background-color: #eeeeee;
+}
+
+.review label {
+    display: block;
+}
+
+.review input:disabled {
+    opacity: .5;
+}
+
+.review input:out-of-range {
+    border: 1px solid firebrick;
+}
+
+.review input:checked {
+    border: none;
+    outline: 2px solid deeppink;
 }

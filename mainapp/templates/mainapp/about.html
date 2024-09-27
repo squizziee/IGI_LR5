@@ -1,4 +1,5 @@
 {% extends 'mainapp/layout.html' %}
+{% load static %}
 
 {% block title_block %}
     About
@@ -10,39 +11,33 @@
         <figure class="article_image" id="certificate">
             <div>
                 <div class="certificate">
-                <div>
-                    <span>
-                        Certificate<br>
-                        of quality
-                    </span>
-                    <br>
-                    <span>This certificate is presented to</span>
-                    <br>
-                    <br>
-                    <span>Computer Construction Company</span>
-                    <br>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laboriosam officiis optio. Aliquid aut, enim eos esse natus neque nostrum officia tenetur? Facilis incidunt officiis qui. Dolores iure quam quos!</span>
+                <div class="certificate_bg_image">
+                    <img class="frame" src="{% static 'frame.svg' %}" alt="...">
+                    <div class="certificate_content">
+                        <span class="certificate_heading">
+                            Certificate of quality
+                        </span>
+                        <br>
+                        <span class="flat_container_emphasis_text">This certificate is presented to</span>
+                        <span class="certificate_company">Computer Construction Company</span>
+                        <br>
+                        <span class="certificate_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laboriosam officiis optio. Aliquid aut, enim eos esse natus neque nostrum officia tenetur</span>
+                        <span class="certificate_bottom_text">Aliquid aut, enim eos esse natus neque nostrum officia tenetur? Facilis incidunt officiis qui. Dolores iure quam quos!</span>
+                    </div>
+
                 </div>
             </div>
             <figcaption>
                     <a rel="nofollow" href="{{ info.certificate.url }}" download="certificate.png" target="_blank">Download</a>
             </figcaption>
             </div>
-
-{#            <div>#}
-{#                <img src="{{ info.certificate.url }}" alt="Certificate image">#}
-{#                <br>#}
-{#                <figcaption>#}
-{#                    <a rel="nofollow" href="{{ info.certificate.url }}" download="certificate.png" target="_blank">Download</a>#}
-{#                </figcaption>#}
-{#            </div>#}
         </figure>
         <h3>Requisites</h3>
         <div class="main_requisites">
             {{ info.requisite | safe }}
         </div>
         <iframe width="600" height="400" src="{{ info.promo_video }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <table style="border: 1px solid #000000; width: 100%; height: 500px">
+        <table class="fun_table">
             <thead>
                 <tr>
                     <th id="Col1" colspan="2">Names</th>
@@ -52,16 +47,16 @@
             </thead>
             <tbody>
                 <tr>
-                    <td headers="aboba1 Col1" rowspan="2">Names left</td>
+                    <td headers="aboba1 Col1" rowspan="2"></td>
                     <td headers="aboba2 Col2" rowspan="2">Names right</td>
-                    <td headers="aboba3 Col3" colspan="2">000101010</td>
+                    <td headers="aboba3 Col3" colspan="2"></td>
                 </tr>
                 <tr>
                     <td colspan="2">1101010101</td>
                 </tr>
                 <tr>
                     <td headers="aboba4 Col1" colspan="3" rowspan="3">Values</td>
-                    <td headers="aboba5 Col2" colspan="1" rowspan="1">456</td>
+                    <td headers="aboba5 Col2" colspan="1" rowspan="1"></td>
                 </tr>
                 <tr>
                     <td headers="aboba6 Col1">123</td>
@@ -72,7 +67,4 @@
             </tbody>
         </table>
     </div>
-
-
-
 {% endblock %}

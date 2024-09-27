@@ -10,3 +10,8 @@ function moveSidebar() {
     let sidebar = document.querySelector("#sidebar");
     sidebar.classList.toggle("active")
 }
+
+// document.addEventListener("load", function () {
+//     let preloader = document.getElementById("preloader");
+//     preloader.classList.add("ready");
+// })

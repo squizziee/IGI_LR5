@@ -1,35 +1,30 @@
 {% load misc %}
-<div class="card">
-    <span>
-        <span style="background: black; color: #f7f7f7">
-           {% for i in review_struct.full_stars|times %}
-                <i class="fa-solid fa-star"></i>
-           {% endfor %}
-            {% for i in review_struct.empty_stars|times %}
-                <i class="fa-regular fa-star"></i>
-           {% endfor %}
-            
-            {{ review_struct.review.user_profile.name }}
-        </span>
-        <br>
-        <span style="background: black; color: #f7f7f7">
+<div class="flat_container">
+    <div class="flat_container_header" style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="flat_container_heading_text"> {{ review_struct.review.user_profile.name }}</span>
+            <div>
+                {% for i in review_struct.full_stars|times %}
+                    <i style="font-size: 20px" class="fa-solid fa-star"></i>
+                {% endfor %}
+                {% for i in review_struct.empty_stars|times %}
+                    <i style="font-size: 20px" class="fa-regular fa-star"></i>
+                {% endfor %}
+            </div>
+    </div>
+    <div class="flat_container_body">
+        <span class="flat_container_emphasis_text">
             Service speed - {{ review_struct.review.speed_rating }}/5
         </span>
-        <br>
-        <i>
-              - {{ review_struct.review.created_at }}
-         </i>
-        <br>
+        <i class="flat_container_emphasis_text_light">
+            {{ review_struct.review.created_at }}
+        </i>
         {% if review_struct.review.is_pleasant_master %}
-            <span>Pleasant service</span>
-            <br>
+            <span class="flat_container_emphasis_text_light">Pleasant master</span>
         {% endif %}
         {% if review_struct.review.is_clean_service %}
-            <span>Clean service</span>
-            <br>
+            <span class="flat_container_emphasis_text_light">Clean service</span>
         {% endif %}
-
-    </span>
-    <span style="display: block;">{{ review_struct.review.text }}</span>
-
+        <br>
+        <span class="flat_container_default_text">{{ review_struct.review.text }}</span>
+    </div>
 </div>

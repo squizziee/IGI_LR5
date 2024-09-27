@@ -1,11 +1,13 @@
-<div class="card">
-    <span style="font-weight: bold">{{ component.name }}</span>
-     -
-    <span style="font-weight: bold">${{ component.price_in_usd }}</span>
-    <form action="{% url 'remove_component' %}" method="post" style="margin: 0">
-        {% csrf_token %}
-        <input type="text" hidden name="component_id" value="{{ component.id }}">
-        <input type="text" hidden name="entry_id" value="{{ entry_id }}">
-        <button class="delete" type="submit">Remove</button>
-    </form>
+<div class="flat_container">
+    <div class="flat_container_header">
+        <span class="flat_container_heading_text">{{ component.name }} - ${{ component.price_in_usd }}</span>
+    </div>
+     <div class="flat_container_body">
+         <form action="{% url 'remove_component' %}" method="post" style="margin: 0">
+            {% csrf_token %}
+            <input type="hidden" name="component_id" value="{{ component.id }}">
+            <input type="hidden" name="entry_id" value="{{ entry_id }}">
+            <button style="margin-top: 0" class="btn_general" type="submit">Remove</button>
+        </form>
+     </div>
 </div>

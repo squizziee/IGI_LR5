@@ -5,38 +5,44 @@
 {% endblock %}
 
 {% block main_block %}
-    <h1>Reviews</h1>
-    <form action="{% url 'add_review' %}" method="post">
-        {% csrf_token %}
-        <select name="rating" id="rating">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <br>
-        <label>
-            <span>Speed rating</span>
-            <input type="range" min="1" max="5" step="1" name="speed_rating">
-        </label>
-        <br>
-        <label>
-            <span>Service was pleasant</span>
-            <input type="checkbox" name="was_pleasant">
-        </label>
-        <br>
-        <label>
-            <span>Service was clean</span>
-            <input type="checkbox" name="was_clean">
-        </label>
-        <br>
-        <input type="text" name="text">
-        <br>
-        <button type="submit">Add review</button>
-    </form>
-    {% for review_struct in reviews %}
-        {% include 'mainapp/review_block.html' with review_struct=review_struct %}
-    {% endfor %}
+    <div class="heading_container">
+        <h1 class="heading_1">Reviews</h1>
+    </div>
+    <div class="review_container">
+        <div class="review flat_container_padding">
+            <form action="{% url 'add_review' %}" method="post">
+                {% csrf_token %}
+                <label for="rating" class="flat_container_emphasis_text_light">
+                    <span>Rating</span>
+                    <select name="rating" id="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </label>
+                <label class="flat_container_emphasis_text_light">
+                    <span>Speed rating</span>
+                    <input required type="number" min="1" max="5" name="speed_rating">
+                </label>
+                <label class="flat_container_emphasis_text_light">
+                    <span>Service was pleasant</span>
+                    <input type="checkbox" name="was_pleasant">
+                </label>
+                <label class="flat_container_emphasis_text_light">
+                    <span>Service was clean</span>
+                    <input type="checkbox" name="was_clean">
+                </label>
+                <textarea name="text" placeholder="Review text" class="input_general"></textarea>
+                <button type="submit" class="btn_general">Add review</button>
+            </form>
+        </div>
+    </div>
 
+    <div class="service_wrapper_2">
+        {% for review_struct in reviews %}
+            {% include 'mainapp/review_block.html' with review_struct=review_struct %}
+        {% endfor %}
+    </div>
 {% endblock %}

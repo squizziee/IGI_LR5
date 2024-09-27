@@ -1,14 +1,21 @@
 {% extends 'mainapp/layout.html' %}
-
+{% load static %}
 {% block title_block %}
     {{ header }}
 {% endblock %}
 
 {% block main_block %}
     <div itemscope itemtype=https://schema.org/HomePage">
-            <div class="heading_container">
-                <h1 class="heading_1">{{ header }}</h1>
+        <div class="heading_container">
+            <h1 class="heading_1">{{ header }}</h1>
+        </div>
+        <div style="display: flex; justify-content:center;">
+            <div class="main_animation">
+                <div class="phone" style="background-image: url('{% static 'phone_fixed.png' %}')"></div>
+                <div class="laptop" style="background-image: url('{% static 'laptop_fixed.png' %}')"></div>
+                <div class="wand" style="background-image: url('{% static 'wand.png' %}')"></div>
             </div>
+        </div>
         <div itemprop="advertisement" class="main_banner">
             <div class="banner_wrapper">
                 {% for banner in banners %}

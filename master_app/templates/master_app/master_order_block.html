@@ -1,36 +1,53 @@
-<div class="card">
-    {% if item.entry.status == 'Ready' or item.entry.status == 'Cancelled' %}
+<div class="flat_container" style="position: relative">
+    {% if item.entry.status == 'Ready' %}
         <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .6)"></div>
+        <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(100, 255, 100, .1)"></div>
+    {% elif item.entry.status == 'Cancelled' %}
+        <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .6)"></div>
+        <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(255, 100, 100, .1)"></div>
     {% endif %}
-    <span style="font-weight: bold">{{ item.entry.service_type.name }} - {{ item.entry.service.name }} - ${{ item.entry.count_total }}</span>
-    <br>
-    <span style="background-color: black; color: #f7f7f7">{{ item.entry.device_type.name }} {{ item.entry.device.name }}</span>
-    <br>
-    <span>{{ item.client.name }} [{{ item.client.passport_serial }}]</span>
-    <br>
-    <div style="display: flex; align-items: center">
-        {% if item.entry.status == 'In progress' %}
-            <button class="control_btn accept inactive">In progress</button>
-        {% elif item.entry.status == 'Ready' %}
-            <button class="control_btn accept inactive">Ready</button>
-        {% elif item.entry.status == 'Cancelled' %}
-            <button class="control_btn accept inactive">Cancelled</button>
-        {% else %}
-            <form action="{% url 'accept_order' %}" method="post">
-            {% csrf_token %}
-            <input type="text" hidden name="order_entry_id" value="{{ item.entry.id }}">
-            <button class="control_btn accept">Accept</button>
-        </form>
-        {% endif %}
-        <form action="{% url 'component_list' %}" method="get">
-            {% csrf_token %}
-            <input type="text" hidden name="entry_id" value="{{ item.entry.id }}">
-            <button class="control_btn">Manage components</button>
-        </form>
-        <form action="{% url 'finish_order' %}" method="post">
-            {% csrf_token %}
-            <input type="text" hidden name="entry_id" value="{{ item.entry.id }}">
-            <button class="control_btn done" type="submit">Done</button>
-        </form>
+    <div class="flat_container_header">
+        <span class="flat_container_heading_text">{{ item.entry.service_type.name }} - {{ item.entry.service.name }} - ${{ item.entry.count_total }}</span>
     </div>
+    <div class="flat_container_body">
+        <span class="flat_container_emphasis_text">{{ item.entry.device_type.name }}</span>
+        <span class="flat_container_emphasis_text">{{ item.entry.device.name }}</span>
+        <br>
+        <span class="flat_container_emphasis_text_light">{{ item.client.name }} [{{ item.client.passport_serial }}]</span>
+        <br>
+        <div style="display: flex">
+{#            {% if item.entry.status == 'In progress' %}#}
+{#                <button disabled class="btn_general">In progress</button>#}
+{#            {% elif item.entry.status == 'Ready' %}#}
+{#                <button class="btn_general">Ready</button>#}
+{#            {% elif item.entry.status == 'Cancelled' %}#}
+{#                <button class="btn_general" >Cancelled</button>#}
+{#            {% else %}#}
+{#                <form action="{% url 'accept_order' %}" method="post">#}
+{#                    {% csrf_token %}#}
+{#                    <input type="text" hidden name="order_entry_id" value="{{ item.entry.id }}">#}
+{#                    <button class="btn_general" style="margin-right: 5px">Accept</button>#}
+{#                </form>#}
+{#            {% endif %}#}
+            {% if item.entry.status == 'Awaiting acceptance' %}
+                <form action="{% url 'accept_order' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" hidden name="order_entry_id" value="{{ item.entry.id }}">
+                    <button class="btn_general" style="margin-right: 5px">Accept</button>
+                </form>
+            {% endif %}
+
+            <form action="{% url 'component_list' %}" method="get">
+                {% csrf_token %}
+                <input type="text" hidden name="entry_id" value="{{ item.entry.id }}">
+                <button class="btn_general" style="margin-right: 5px">Manage components</button>
+            </form>
+            <form action="{% url 'finish_order' %}" method="post">
+                {% csrf_token %}
+                <input type="text" hidden name="entry_id" value="{{ item.entry.id }}">
+                <button class="btn_general" type="submit">Done</button>
+            </form>
+        </div>
+    </div>
+
 </div>

@@ -74,9 +74,13 @@ def coupons(request):
 
 @login_required
 def reviews(request):
+    user = request.user
+    user_posted_review = False
     review_list = Review.objects.all()
     review_list_ext = []
     for review in review_list:
+        if review.user_profile.user == user:
+            user_posted_review = True
         review_list_ext.append(
             {
                 'review': review,
@@ -84,7 +88,7 @@ def reviews(request):
                 'empty_stars': 5 - review.rating
             }
         )
-    return render(request, 'mainapp/reviews.html', {'reviews': review_list_ext})
+    return render(request, 'mainapp/reviews.html', {'reviews': review_list_ext, 'review_posted': user_posted_review})
 
 
 @login_required
