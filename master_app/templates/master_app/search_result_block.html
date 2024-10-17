@@ -1,44 +1,16 @@
-<style>
-    button.add_search {
-        outline: none;
-        padding: 5px 10px;
-        border-radius: 0;
-        border: 3px solid #f7f7f7;
-        color: #f7f7f7;
-        background-color: transparent;
-        font-family: Consolas, sans-serif;
-        font-weight: bold;
-        margin-top: 10px;
-        margin-right: 10px;
-        transition: .2s ease-in-out;
-        cursor: pointer;
-    }
-    button.add_search:hover {
-        background-color: #f7f7f7;
-        color: black;
-    }
-
-    .card_search {
-        background-color: black;
-        color: #f7f7f7;
-        font-family: Consolas, sans-serif;
-        padding: 20px;
-        margin: 0 15px 15px 15px;
-        box-shadow: 0 0 30px rgba(0, 0, 0, .1);
-    }
-
-</style>
-
-<div class="card_search">
-    <span style="font-weight: bold; background-color: #f7f7f7; color: black">{{ component.component_type_id.name }}</span> - search result
-    <br>
-    <span style="font-weight: bold">{{ component.name }}</span>
-    -
-    <span style="font-weight: bold">${{ component.price_in_usd }}</span>
-    <form action="{% url 'add_component' %}" method="post" style="display: inline-block">
-        {% csrf_token %}
-        <input type="text" hidden name="component_id" value="{{ component.id }}">
-        <input type="text" hidden name="entry_id" value="{{ entry_id }}">
-        <button class="add_search" type="submit">+</button>
-    </form>
+<div class="flat_container">
+    <div class="flat_container_header">
+        <span class="flat_container_heading_text">Search result — {{ component.component_type_id.name }}</span>
+    </div>
+    <div class="flat_container_body">
+        <span class="flat_container_emphasis_text">{{ component.name }}</span>
+        <span class="flat_container_emphasis_text">${{ component.price_in_usd }}</span>
+        <br>
+        <form action="{% url 'add_component' %}" method="post" style="display: inline-block">
+            {% csrf_token %}
+            <input type="hidden" name="component_id" value="{{ component.id }}">
+            <input type="hidden" name="entry_id" value="{{ entry_id }}">
+            <button class="btn_general" type="submit">+</button>
+        </form>
+    </div>
 </div>

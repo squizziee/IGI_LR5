@@ -24,10 +24,11 @@
         </form>
     </div>
 
-        {% for component in search_result %}
-            {% include 'master_app/search_result_block.html' with component=component entry_id=entry_id %}
-        {% endfor %}
-
+        <div class="service_wrapper_2">
+            {% for component in search_result %}
+                {% include 'master_app/search_result_block.html' with component=component entry_id=entry_id %}
+            {% endfor %}
+        </div>
         {% for category in categories %}
             {% include 'master_app/component_list_block.html' with category=category entry_id=entry_id %}
         {% endfor %}

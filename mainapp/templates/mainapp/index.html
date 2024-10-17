@@ -17,9 +17,18 @@
             </div>
         </div>
         <div itemprop="advertisement" class="main_banner">
-            <div class="banner_wrapper">
+            <div class="slider" loop navs pagination auto pauseonhover delay=2500>
+                <div class="prev"><i class="fa-solid fa-chevron-left"></i></div>
+                <div class="next"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="slider_counter"></div>
+                <div class="slider_pagination">
+                    {% for banner in banners %}
+                        <div class="slider_pagination_item"></div>
+                    {% endfor %}
+                </div>
                 {% for banner in banners %}
-                    <img class="banner_image" src="{{ banner.image.url }}" alt="{{ banner.description }}">
+                    <img class="slider_image" src="{{ banner.image.url }}" alt="{{ banner.description }}">
+                    <span class="slider_image_caption">{{ banner.description }}</span>
                 {% endfor %}
             </div>
         </div>
