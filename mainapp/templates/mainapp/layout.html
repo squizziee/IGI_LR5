@@ -27,6 +27,10 @@
             <div></div>
         </div>
     </div>
+    <div class="timer">
+        <div class="time">00:00:00:00</div>
+        <button class="reset_timer btn_general">Reset</button>
+    </div>
     <div class="wrapper">
         {% include 'mainapp/navigation.html' %}
         <header class="main_header">
@@ -51,5 +55,6 @@
     </div>
     <script src="{% static 'events.js' %}"></script>
     <script src="{% static 'slider.js' %}"></script>
+    <script src="{% static 'timer.js' %}"></script>
 </body>
 </html>
