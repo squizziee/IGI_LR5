@@ -4,7 +4,10 @@ import logging
 import requests
 from django import template
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+from django.core.files import File
+from django.core.files.base import ContentFile
+from django.core.files.temp import NamedTemporaryFile
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from news_app.models import NewsArticle
@@ -43,6 +46,7 @@ def contacts(request):
             'experience': entity.experience_in_years,
             'email': master_user.email,
             'photo': entity.photo,
+            'phone_number': entity.phone_number,
             'services': entity.speciality.services.all()
         })
     return render(request, 'mainapp/contacts.html', {'contact_list': contact_list})
@@ -140,6 +144,7 @@ def random_cat_fact(request):
 def get_table_data(request):
     masters = User.objects.filter(groups__name='masters').all()
     contact_list = []
+    specialities = MasterSpeciality.objects.all()
     for master_user in masters:
         entity = Master.objects.filter(user=master_user).get()
         contact_list.append({
@@ -147,10 +152,11 @@ def get_table_data(request):
             'name': entity.name,
             'experience': entity.experience_in_years,
             'email': master_user.email,
+            'phone_number': entity.phone_number,
             'photo': entity.photo,
             'speciality': entity.speciality
         })
-    return render(request, 'mainapp/management_table.html', {'contact_list': contact_list})
+    return render(request, 'mainapp/management_table.html', {'contact_list': contact_list, 'specialities': specialities})
 
 
 def get_master_json(request, master_id):
@@ -161,6 +167,7 @@ def get_master_json(request, master_id):
         'experience': master.experience_in_years,
         'email': master_user.email,
         'image_url': master.photo.url,
+        'phone_number': master.phone_number,
         'speciality': {
             'name': master.speciality.name,
             'description': master.speciality.description,
@@ -176,3 +183,46 @@ def get_master_json(request, master_id):
             }
         )
     return JsonResponse(json.dumps(data), safe=False)
+
+
+def add_master(request):
+    username = request.POST['username']
+    first_name = request.POST['first_name']
+    last_name = request.POST['last_name']
+    experience = request.POST['experience']
+    email = request.POST['email']
+    phone_number = request.POST['phone_number']
+    avatar_url = request.POST['avatar_url']
+    speciality_id = request.POST['speciality']
+
+    new_user = User()
+    new_user.email = email
+    new_user.set_password('master')
+    new_user.username = username
+    new_user.first_name = first_name
+    new_user.last_name = last_name
+    new_user.save()
+
+    new_master = Master()
+    new_master.user = User.objects.all().first()
+    new_master.name = first_name + " " + last_name
+    new_master.user = new_user
+    new_master.experience_in_years = experience
+    new_master.phone_number = phone_number
+    new_master.speciality = MasterSpeciality.objects.filter(id=speciality_id).first()
+
+    try:
+        response = requests.get(avatar_url)
+        if response.status_code == 200:
+            image_content = ContentFile(response.content)
+            new_master.photo.save(f"{avatar_url.split('/')[-1]}", image_content, save=True)
+        else:
+            print(f"Failed to download image. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"Error occurred while downloading image: {e}")
+
+    master_group = Group.objects.get(name='masters')
+    master_group.user_set.add(new_user)
+
+    new_master.save()
+    return redirect('/table/')

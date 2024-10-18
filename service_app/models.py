@@ -59,6 +59,7 @@ class Master(models.Model):
     experience_in_years = models.IntegerField("Work experience in years")
     speciality = models.ForeignKey(MasterSpeciality, on_delete=models.CASCADE)
     photo = models.ImageField('Profile picture for master', null=True)
+    phone_number = models.CharField('Phone number', max_length=15, default="80291112233")
 
     def __str__(self):
         return self.name

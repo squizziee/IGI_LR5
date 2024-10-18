@@ -202,6 +202,12 @@ q {
     cursor: pointer;
     text-decoration: none;
     color: #000000;
+    pointer-events: all;
+}
+
+.btn_general:disabled {
+    opacity: .5;
+    pointer-events: none;
 }
 
 .btn_general:hover {
@@ -633,6 +639,11 @@ table, th, td {
     animation: 2s pulse ease-in-out;
 }
 
+.input_general.invalid {
+    background-color: rgba(255, 200, 200, .3);
+    border: 1px solid orangered;
+}
+
 .input_general:required:nth-child(n) {
     animation: 2s pulse ease-in-out;
 }
@@ -674,10 +685,9 @@ table, th, td {
     position: fixed;
     z-index: 999;
     background-color: #f7f7f7;
-    /*display: flex;*/
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: none;
 }
 
 .preloader {
@@ -685,10 +695,9 @@ table, th, td {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    transition: .3s opacity ease-in-out;
 }
 
-.preloader.ready {
+.preloader_container.ready {
     opacity: 0;
     pointer-events: none;
 }

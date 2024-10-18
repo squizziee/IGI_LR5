@@ -9,27 +9,30 @@
         <h1 class="heading_1">Management</h1>
     </div>
     <div id="table_wrapper">
+        <div class="error_message">
+
+        </div>
+        <form name="add_master_form" action="{% url 'add_master' %}" method="post">
+            {% csrf_token %}
+
+            <input class="input_general" type="text" name="username" placeholder="Username" required>
+            <input class="input_general" type="text" name="first_name" placeholder="First name" required>
+            <input class="input_general" type="text" name="last_name" placeholder="Last name" required>
+            <input class="input_general" type="number" name="experience" placeholder="Experience" required>
+            <input class="input_general" type="email" name="email" placeholder="Email" required>
+            <input class="input_general" type="text" name="phone_number" placeholder="Phone number" required onchange="validate_form()">
+            <input class="input_general" type="url" name="avatar_url" placeholder="Avatar url" required onchange="validate_form()">
+            <select class="input_general" name="speciality">
+                {% for speciality in specialities %}
+                    <option value="{{ speciality.id }}">{{ speciality.name }}</option>
+                {% endfor %}
+
+            </select>
+
+            <button class="btn_general" name="submit" type="submit" disabled>Add</button>
+        </form>
         <div id="info">
-{#            <div class="flat_container table_info">#}
-{#                <div class="flat_container_double_header">#}
-{#                    <div class="left" style="padding: 20px">#}
-{#                        <span class="flat_container_heading_text">{{ contact.name }}</span>#}
-{#                        <br>#}
-{#                        <span style="margin-top: 5px" class="flat_container_emphasis_text">{{ contact.email }}</span>#}
-{#                        <span class="flat_container_emphasis_text">{{ contact.experience }} years of experience</span>#}
-{#                    </div>#}
-{#                    <div class="right">#}
-{#                        <div class="master_image" style='background-image: url({{ contact.photo.url }}); '></div>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <div class="flat_container_body">#}
-{#                    {% for service in contact.services %}#}
-{#                        <span style="display: block;" class="flat_container_emphasis_text_light">{{ service.name }}:</span>#}
-{#                        <span class="flat_container_default_text">- {{ service.description }}</span>#}
-{#                    {% endfor %}#}
-{#                </div>#}
-{#            </div>#}
+
         </div>
         <div id="search">
             <input class="input_general" type="text" id="query">
@@ -48,6 +51,8 @@
                     <th onclick="sort_outer(2)">Experience</th>
                     <th onclick="sort_outer(3)">Email</th>
                     <th onclick="sort_outer(4)">Speciality</th>
+                    <th>Phone number</th>
+                    <th>Select</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,9 +70,15 @@
                             {% endfor %}
 
                         </td>
+                    <td>{{ contact.phone_number }}</td>
+                    <td><input type="checkbox"></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <button class="btn_general" id="award_btn" onclick="award_selected()">Award selected</button>
+        <div id="awarded_masters">
+
+        </div>
     </div>
 {% endblock %}
