@@ -863,3 +863,12 @@ table, th, td {
     font-size: 20px;
     margin-right: 20px;
 }
+
+#table_wrapper > #info {
+    display: block;
+}
+
+#table_wrapper > #info img {
+    display: block;
+    width: 200px;
+}

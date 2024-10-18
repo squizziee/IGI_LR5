@@ -5,10 +5,11 @@ import requests
 from django import template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from news_app.models import NewsArticle
 from mainapp.models import FAQ, CompanyInfo, Coupon, Review, CompanyPrivacyPolicy, CompanySponsor, CompanyBanner
-from service_app.models import Master
+from service_app.models import Master, MasterSpeciality
 from user_app.models import UserProfile
 
 logger = logging.getLogger(__name__)
@@ -134,3 +135,44 @@ def random_cat_fact(request):
     response = requests.get("https://catfact.ninja/fact")
     data = response.json()
     return dict(data)
+
+
+def get_table_data(request):
+    masters = User.objects.filter(groups__name='masters').all()
+    contact_list = []
+    for master_user in masters:
+        entity = Master.objects.filter(user=master_user).get()
+        contact_list.append({
+            'id': entity.id,
+            'name': entity.name,
+            'experience': entity.experience_in_years,
+            'email': master_user.email,
+            'photo': entity.photo,
+            'speciality': entity.speciality
+        })
+    return render(request, 'mainapp/management_table.html', {'contact_list': contact_list})
+
+
+def get_master_json(request, master_id):
+    master = Master.objects.filter(id=master_id).first()
+    master_user = User.objects.filter(id=master.user.id).first()
+    data = {
+        'name': master.name,
+        'experience': master.experience_in_years,
+        'email': master_user.email,
+        'image_url': master.photo.url,
+        'speciality': {
+            'name': master.speciality.name,
+            'description': master.speciality.description,
+            'services': []
+        }
+    }
+    for service in master.speciality.services.all():
+        data['speciality']['services'].append(
+            {
+                'service_name': service.name,
+                'service_description': service.description,
+                'service_price': service.base_price_in_usd,
+            }
+        )
+    return JsonResponse(json.dumps(data), safe=False)

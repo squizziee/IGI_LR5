@@ -22,13 +22,19 @@ reset_btn.addEventListener('click', () => {
 function start_timer(timer_end) {
     return setInterval(() => {
         let current_date = new Date()
-        let diff = (Math.abs(timer_end - current_date));
-        let days = Math.floor(diff/(1000*60*60*24));
-        let hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-        let minutes = Math.floor((diff%(1000*60*60))/(1000*60));
-        let seconds = Math.floor((diff%(1000*60))/1000);
-        //console.log(`${days}:${hours}:${minutes}:${seconds}`)
-        update_time(days, hours, minutes, seconds);
+
+        if (timer_end - current_date < 0) {
+            update_time(0, 0, 0, 0);
+            clearInterval(curr_interval_id);
+        } else {
+            let diff = (Math.abs(timer_end - current_date));
+            let days = Math.floor(diff/(1000*60*60*24));
+            let hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+            let minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+            let seconds = Math.floor((diff%(1000*60))/1000);
+            //console.log(`${days}:${hours}:${minutes}:${seconds}`)
+            update_time(days, hours, minutes, seconds);
+        }
     }, 1000);
 }
 
@@ -41,6 +47,6 @@ function update_time(days, hours, minutes, seconds) {
 }
 
 function num_len(num) {
-    if (num === 0) return 0;
+    if (num === 0) return 1;
     return Math.floor(Math.log10(num) + 1);
 }

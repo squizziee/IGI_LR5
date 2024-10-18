@@ -1,0 +1,73 @@
+{% extends 'mainapp/layout.html' %}
+
+{% block title_block %}
+    Management
+{% endblock %}
+
+{% block main_block %}
+    <div class="heading_container">
+        <h1 class="heading_1">Management</h1>
+    </div>
+    <div id="table_wrapper">
+        <div id="info">
+{#            <div class="flat_container table_info">#}
+{#                <div class="flat_container_double_header">#}
+{#                    <div class="left" style="padding: 20px">#}
+{#                        <span class="flat_container_heading_text">{{ contact.name }}</span>#}
+{#                        <br>#}
+{#                        <span style="margin-top: 5px" class="flat_container_emphasis_text">{{ contact.email }}</span>#}
+{#                        <span class="flat_container_emphasis_text">{{ contact.experience }} years of experience</span>#}
+{#                    </div>#}
+{#                    <div class="right">#}
+{#                        <div class="master_image" style='background-image: url({{ contact.photo.url }}); '></div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="flat_container_body">#}
+{#                    {% for service in contact.services %}#}
+{#                        <span style="display: block;" class="flat_container_emphasis_text_light">{{ service.name }}:</span>#}
+{#                        <span class="flat_container_default_text">- {{ service.description }}</span>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+        <div id="search">
+            <input class="input_general" type="text" id="query">
+            <select class="btn_general" id="column_id">
+                <option value="1">Name</option>
+                <option value="3">Email</option>
+                <option value="4">Speciality</option>
+            </select>
+            <button class="btn_general" id="submit">Search</button>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-family: 'Roboto', sans-serif" id="management_table">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th onclick="sort_outer(1)">Name</th>
+                    <th onclick="sort_outer(2)">Experience</th>
+                    <th onclick="sort_outer(3)">Email</th>
+                    <th onclick="sort_outer(4)">Speciality</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contact_list %}
+                    <tr onclick="show_info({{ contact.id }})">
+                        <td><img src="{{ contact.photo.url }}" alt="master_photo" width="200"></td>
+                        <td data-content="{{ contact.name }}">{{ contact.name }}</td>
+                        <td data-content="{{ contact.experience }}">{{ contact.experience }}</td>
+                        <td data-content="{{ contact.email }}">{{ contact.email }}</td>
+                        <td data-content="{{ contact.speciality }}">
+                            <span class="speciality">{{ contact.speciality }}</span>
+                            <br>
+                            {% for service in contact.speciality.services.all  %}
+                                {{ service.name }}<br>
+                            {% endfor %}
+
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
