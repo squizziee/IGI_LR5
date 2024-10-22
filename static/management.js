@@ -195,10 +195,10 @@ async function show_info(master_id) {
 
 // master addition
 function validate_form() {
-    console.log("changed")
     let form = document.forms['add_master_form'];
     let error_message_area = document.querySelector('.error_message')
     let submit_btn = form["submit"];
+    submit_btn.setAttribute('disabled', true);
     error_message_area.innerText = ''
 
     let phone = form['phone_number'].value;

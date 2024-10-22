@@ -1,0 +1,43 @@
+{% extends 'mainapp/layout.html' %}
+{% load static %}
+
+{% block title_block %}
+    JS OOP
+{% endblock %}
+
+{% block main_block %}
+    <div class="heading_container">
+        <h1 class="heading_1">JS OOP</h1>
+    </div>
+
+    <div id="oop_content" style="display: flex; justify-content: space-evenly">
+        <div id="owners"></div>
+        <div id="sectors"></div>
+    </div>
+    <div id="result">
+
+    </div>
+    <div id="add_forms" style="display: flex; justify-content: space-evenly">
+        <form name="owner_form">
+            <label>
+                Owner name
+                <input type="text" name="name" required>
+            </label>
+            <button type="submit">Add owner</button>
+        </form>
+        <form name="sector_form">
+            <label>
+                Sector area
+                <input type="number" name="area" required>
+            </label>
+            <br>
+            <label>
+                Sector owner id
+                <input type="number" name="owner_id" required>
+            </label>
+            <button type="submit">Add sector</button>
+        </form>
+    </div>
+
+    <script src="{% static 'oop.js' %}"></script>
+{% endblock %}

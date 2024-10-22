@@ -1,4 +1,5 @@
 {% extends 'mainapp/layout.html' %}
+{% load static %}
 
 {% block title_block %}
     Service masters
@@ -10,24 +11,28 @@
     </div>
     <div class="service_wrapper">
         {% for master in master_list %}
-            <div class="flat_container">
-                <div class="flat_container_header">
-                    <span class="flat_container_heading_text">Master {{ master.name }}</span>
-                </div>
-                <div class="flat_container_body">
-                    <form action="{% url 'add_to_cart' %}" method="post">
-                        <input type="hidden" name="service_type" value="{{ service_type.id }}">
-                        <input type="hidden" name="service" value="{{ service.id }}">
-                        <input type="hidden" name="device_type" value="{{ device_type.id }}">
-                        <input type="hidden" name="device" value="{{ device.id }}">
-                        <input type="hidden" name="master" value="{{ master.id }}">
-                        {% csrf_token %}
-                        <button class="btn_general" type="submit">Add to cart</button>
-                    </form>
+            <div class="card_wrapper">
+                <div class="flat_container service_item">
+                    <div class="flat_container_header">
+                        <span class="flat_container_heading_text">Master {{ master.name }}</span>
+                    </div>
+                    <div class="flat_container_body">
+                        <form action="{% url 'add_to_cart' %}" method="post">
+                            <input type="hidden" name="service_type" value="{{ service_type.id }}">
+                            <input type="hidden" name="service" value="{{ service.id }}">
+                            <input type="hidden" name="device_type" value="{{ device_type.id }}">
+                            <input type="hidden" name="device" value="{{ device.id }}">
+                            <input type="hidden" name="master" value="{{ master.id }}">
+                            {% csrf_token %}
+                            <button class="btn_general" type="submit">Add to cart</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+    <div class="pagination">
 
-
+    </div>
+    <script src="{% static 'paging.js' %}"></script>
 {% endblock %}

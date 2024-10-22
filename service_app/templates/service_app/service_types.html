@@ -1,4 +1,5 @@
 {% extends 'mainapp/layout.html' %}
+{% load static %}
 
 {% block title_block %}
     Service types
@@ -11,16 +12,74 @@
 
     <div class="service_wrapper">
         {% for service_type in service_types %}
-            <div class="flat_container">
-                <div class="flat_container_header">
-                    <a class="flat_container_heading_text" href="{{ service_type.id }}/">{{ service_type.name }}</a>
-                </div>
-                <div class="flat_container_body">
-                    <span class="flat_container_default_text">{{ service_type.description }}</span>
+            <div class="card_wrapper">
+                <div class="flat_container service_item">
+                    <div class="flat_container_header">
+                        <a class="flat_container_heading_text" href="{{ service_type.id }}/">{{ service_type.name }}</a>
+                    </div>
+                    <div class="flat_container_body">
+                        <span class="flat_container_default_text">{{ service_type.description }}</span>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+    <div class="pagination">
 
+    </div>
+    <script src="{% static 'paging.js' %}"></script>
+    <script>
+        let content = document.querySelector('.service_wrapper');
+        content.style.display = 'none'
+        let age = 0
+        let birth_timestamp = null;
+        try {
+            birth_timestamp = new Date(prompt('Date of birth in YYYY-MM-DD format', (new Date()).toDateString()))
+            let today_timestamp = new Date()
+            age = getFullYearDifference(birth_timestamp, today_timestamp)
+        } catch (Exception) {} finally {
+            if (age > 18) {
+                show_content()
+                alert((getWeek(new Date(birth_timestamp))))
+            } else {
+                alert("Too young, fella! You'll need some supervision for that.")
+            }
+        }
 
+        function show_content() {
+            content.style.display = 'block'
+        }
+
+        function getFullYearDifference(startDate, endDate) {
+            // Ensure the dates are in the correct order
+            // Get the year difference between the two dates
+            let yearDiff = endDate.getFullYear() - startDate.getFullYear();
+
+            // Adjust for incomplete years by checking if the end date is before the anniversary of the start date
+            const endMonth = endDate.getMonth();
+            const endDay = endDate.getDate();
+            const startMonth = startDate.getMonth();
+            const startDay = startDate.getDate();
+
+            // If the end date is before the start date anniversary in the same year, subtract 1 from the year difference
+            if (endMonth < startMonth || (endMonth === startMonth && endDay < startDay)) {
+                yearDiff--;
+            }
+
+            return yearDiff;
+        }
+
+        function getWeek(date) {
+            const currentDate = new Date(date);
+
+            currentDate.setHours(0, 0, 0, 0);
+            currentDate.setDate(currentDate.getDate() + 4 - (currentDate.getDay() || 7));
+
+            const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
+
+            const weekNumber = Math.ceil((((currentDate - startOfYear) / 86400000) + 1) / 7);
+
+            return weekNumber;
+        }
+    </script>
 {% endblock %}

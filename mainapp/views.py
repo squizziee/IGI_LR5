@@ -226,3 +226,7 @@ def add_master(request):
 
     new_master.save()
     return redirect('/table/')
+
+
+def oop_page(request):
+    return render(request, 'mainapp/oop.html')

@@ -16,4 +16,5 @@ urlpatterns = [
     path('table/', views.get_table_data, name="table"),
     path('masters/<int:master_id>', views.get_master_json, name="get_master"),
     path('masters/add', views.add_master, name="add_master"),
+    path('oop/', views.oop_page, name="table"),
 ]
