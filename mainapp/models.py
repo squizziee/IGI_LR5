@@ -21,6 +21,7 @@ class CompanyInfo(models.Model):
     promo_video = models.CharField("Promo video link", max_length=150, default="/")
     certificate = models.ImageField("Company certificate", null=True)
     requisite = models.TextField("Company requisites in html", default="")
+    slider_delay_in_millis = models.IntegerField("Delay for image change in slider on main page", default=5000)
 
 
 class Coupon(models.Model):
@@ -63,3 +64,5 @@ class CompanySponsor(models.Model):
 class CompanyBanner(models.Model):
     image = models.ImageField("Banner image", null=True)
     description = models.TextField("Banner info")
+    url = models.TextField("Redirect url", null=True)
+

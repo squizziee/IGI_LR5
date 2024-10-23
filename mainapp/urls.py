@@ -18,4 +18,6 @@ urlpatterns = [
     path('masters/add', views.add_master, name="add_master"),
     path('oop/', views.oop_page, name="oop"),
     path('chartjs/', views.chart_page, name="chart"),
+    path('slider_setup/', views.slider_setup_page, name="slider_setup"),
+    path('update_slider_setup/', views.update_slider_setup, name="update_slider_setup"),
 ]

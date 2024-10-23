@@ -1,121 +1,149 @@
 
-let slider = document.querySelector(".slider");
-let slider_counter = slider.querySelector(".slider_counter");
-let prev_ctrl = slider.querySelector(".prev");
-let next_ctrl = slider.querySelector(".next");
-let slides = slider.querySelectorAll('.slider_image');
-let current_slide_index = 0;
-let captions = slider.querySelectorAll(".slider_image_caption");
-let pagination = slider.querySelector(".slider_pagination");
-let pagination_items = pagination.querySelectorAll(".slider_pagination_item");
+class Slider {
+    #slider = null
+    #slider_counter = null
+    #prev_ctrl = null
+    #next_ctrl = null
+    #slides = null
+    #current_slide_index = 0;
+    #captions = null
+    #pagination = null
+    #pagination_items = null
+    #config = {}
 
-let slider_config = {
-    'loop': slider.getAttribute('loop') !== null,
-    'navs': slider.getAttribute('navs') !== null,
-    'pagination': slider.getAttribute('pagination') !== null,
-    'auto': slider.getAttribute('auto') !== null,
-    'pause_on_hover': slider.getAttribute('pauseonhover') !== null,
-    'delay': slider.getAttribute('delay'),
-}
+    #interval_id = null
 
-console.log(slider_config)
+    constructor(components) {
+        this.#slider = components['slider']
+        this.#slider_counter = components['slider_counter']
+        this.#prev_ctrl = components['prev_ctrl']
+        this.#next_ctrl = components['next_ctrl']
+        this.#slides = components['slides']
+        this.#current_slide_index = 0;
+        this.#captions = components['captions']
+        this.#pagination = components['pagination']
+        this.#pagination_items = components['pagination_items']
 
-let interval_id = null;
-
-setup_initial();
-setup_controls();
-setup_auto_rotation();
-setup_hover_behaviour()
-
-// functions
-function switch_slides(index) {
-    slides[current_slide_index].classList.remove('active');
-    pagination_items[current_slide_index].classList.remove('active');
-    captions[current_slide_index].classList.remove('active');
-
-    current_slide_index = index;
-    slides[index].classList.add('active');
-    update_slider_counter();
-    update_pagination();
-    update_captions();
-}
-
-function update_slider_counter() {
-    slider_counter.innerHTML = `${current_slide_index + 1} / ${slides.length}`
-}
-
-function update_pagination() {
-    pagination_items[current_slide_index].classList.add('active');
-}
-
-function update_captions() {
-    captions[current_slide_index].classList.add('active');
-}
-
-// setup functions
-function setup_initial() {
-    slides[0].classList.add('active')
-    captions[0].classList.add('active')
-    pagination_items[0].classList.add('active')
-    update_slider_counter();
-
-    for (let i = 0; i < pagination_items.length; i++) {
-        pagination_items[i].addEventListener('click', () => {
-            switch_slides(i)
-        })
-    }
-
-    prev_ctrl.addEventListener('click', () => {
-        if (current_slide_index === 0) {
-            if (slider_config['loop']) {
-                switch_slides(slides.length - 1);
-            }
-        } else {
-            switch_slides(current_slide_index - 1)
+        this.#config = {
+            'loop': this.#slider.getAttribute('loop') !== null,
+            'navs': this.#slider.getAttribute('navs') !== null,
+            'pagination': this.#slider.getAttribute('pagination') !== null,
+            'auto': this.#slider.getAttribute('auto') !== null,
+            'pause_on_hover': this.#slider.getAttribute('pauseonhover') !== null,
+            'delay': this.#slider.getAttribute('delay'),
         }
-    });
 
-    next_ctrl.addEventListener('click', () => {
-        if (current_slide_index === slides.length - 1) {
-            if (slider_config['loop']) {
-                switch_slides(0);
-            }
-        } else {
-            switch_slides(current_slide_index + 1)
+        this.#setup()
+    }
+
+    #setup() {
+        this.#setup_initial()
+        this.#setup_controls()
+        this.#setup_auto_rotation()
+        this.#setup_hover_behaviour()
+    }
+
+    #setup_initial() {
+        this.#slides[0].classList.add('active')
+        this.#captions[0].classList.add('active')
+        this.#pagination_items[0].classList.add('active')
+        this.#update_slider_counter();
+
+        for (let i = 0; i < this.#pagination_items.length; i++) {
+            this.#pagination_items[i].addEventListener('click', () => {
+                this.#switch_slides(i)
+            })
         }
-    });
-}
 
-function setup_controls() {
-    if (slider_config['navs']) {
-        prev_ctrl.classList.add('enabled');
-        next_ctrl.classList.add('enabled');
-    }
-    if (slider_config['pagination']) {
-        pagination.classList.add('enabled')
-    }
-}
-
-function setup_auto_rotation() {
-    if (slider_config['auto']) {
-        let delay = slider_config['delay'] === null ? 5000 : slider_config['delay']
-        interval_id = setInterval(() => {
-            if (current_slide_index === slides.length - 1) {
-                switch_slides(0)
+        this.#prev_ctrl.addEventListener('click', () => {
+            if (this.#current_slide_index === 0) {
+                if (this.#config['loop']) {
+                    this.#switch_slides(this.#slides.length - 1);
+                }
             } else {
-                switch_slides(current_slide_index + 1);
+                this.#switch_slides(this.#current_slide_index - 1)
             }
-        }, delay)
-    }
-}
+        });
 
-function setup_hover_behaviour() {
-    if (slider_config['pause_on_hover']) {
-        slider.addEventListener('mouseover', () => {
-            clearInterval(interval_id);
-        })
-        slider.addEventListener('mouseout', () => {
-            setup_auto_rotation();
-        })
+        this.#next_ctrl.addEventListener('click', () => {
+            if (this.#current_slide_index === this.#slides.length - 1) {
+                if (this.#config['loop']) {
+                    this.#switch_slides(0);
+                }
+            } else {
+                this.#switch_slides(this.#current_slide_index + 1)
+            }
+        });
+    }
+
+    #setup_controls() {
+        if (this.#config['navs']) {
+            this.#prev_ctrl.classList.add('enabled');
+            this.#next_ctrl.classList.add('enabled');
+        }
+        if (this.#config['pagination']) {
+            this.#pagination.classList.add('enabled')
+        }
+    }
+
+    #setup_auto_rotation() {
+        if (this.#config['auto']) {
+            let delay = this.#config['delay'] === null ? 5000 : this.#config['delay']
+            this.#interval_id = setInterval(() => {
+                if (this.#current_slide_index === this.#slides.length - 1) {
+                    this.#switch_slides(0)
+                } else {
+                    this.#switch_slides(this.#current_slide_index + 1);
+                }
+            }, delay)
+        }
+    }
+
+    #setup_hover_behaviour() {
+        if (this.#config['pause_on_hover']) {
+            this.#slider.addEventListener('mouseover', () => {
+                clearInterval(this.#interval_id);
+            })
+            this.#slider.addEventListener('mouseout', () => {
+                this.#setup_auto_rotation();
+            })
+        }
+    }
+
+    #switch_slides(index) {
+        this.#slides[this.#current_slide_index].classList.remove('active');
+        this.#pagination_items[this.#current_slide_index].classList.remove('active');
+        this.#captions[this.#current_slide_index].classList.remove('active');
+
+        this.#current_slide_index = index;
+        this.#slides[index].classList.add('active');
+        this.#update_slider_counter();
+        this.#update_pagination();
+        this.#update_captions();
+    }
+
+    #update_slider_counter() {
+        this.#slider_counter.innerHTML = `${this.#current_slide_index + 1} / ${this.#slides.length}`
+    }
+
+    #update_pagination() {
+        this.#pagination_items[this.#current_slide_index].classList.add('active');
+    }
+
+    #update_captions() {
+        this.#captions[this.#current_slide_index].classList.add('active');
     }
 }
+let slider = document.querySelector(".slider")
+let pagination = slider.querySelector(".slider_pagination")
+
+let sliderObj = new Slider({
+    'slider': slider,
+    'slider_counter' : slider.querySelector(".slider_counter"),
+    'prev_ctrl' : slider.querySelector(".prev"),
+    'next_ctrl' : slider.querySelector(".next"),
+    'slides' : slider.querySelectorAll('.slider_image'),
+    'captions' : slider.querySelectorAll(".slider_image_caption"),
+    'pagination' : pagination,
+    'pagination_items' : pagination.querySelectorAll(".slider_pagination_item"),});
+

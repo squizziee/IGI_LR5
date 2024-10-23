@@ -1,0 +1,55 @@
+{% extends 'mainapp/layout.html' %}
+{% load static %}
+
+{% block title_block %}
+    Slider setup
+{% endblock %}
+
+{% block main_block %}
+    <div class="heading_container">
+        <h1 class="heading_1">Slider setup</h1>
+    </div>
+    <div id="alter_form" style="display: flex; justify-content: space-evenly">
+        <form name="slider_form">
+            {% csrf_token %}
+            <label>
+                Slider delay
+                <input type="number" min="100" name="delay" required>
+            </label>
+            <button type="submit">Apply</button>
+        </form>
+    </div>
+
+    <script>
+        let form = document.forms['slider_form']
+        let data = new FormData(form)
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            showPreloader()
+            if (data.get('delay') < 100) {
+                alert(`Delay of ${data.get('delay')} is not acceptable`);
+                return;
+            }
+            fetch("/update_slider_setup/", {
+                method: "POST",
+                body: data,
+            }).then(data => {
+                hidePreloader()
+                alert("All done.")
+            });
+
+        })
+
+        function showPreloader() {
+            let preloader = document.querySelector('.preloader_container');
+            preloader.classList.remove('ready');
+        }
+
+        function hidePreloader() {
+            let preloader = document.querySelector('.preloader_container');
+            preloader.classList.add('ready');
+        }
+
+    </script>
+{% endblock %}

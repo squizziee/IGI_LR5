@@ -3,7 +3,7 @@ import logging
 
 import requests
 from django import template
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group
 from django.core.files import File
 from django.core.files.base import ContentFile
@@ -18,6 +18,10 @@ from user_app.models import UserProfile
 logger = logging.getLogger(__name__)
 
 
+def admin_required(user):
+    return user.is_authenticated and user.is_superuser
+
+
 def index(request):
     latest_news = NewsArticle.objects.latest('date')
     company_info = CompanyInfo.objects.latest('id')
@@ -30,6 +34,7 @@ def index(request):
         'joke': random_joke(request),
         'cat_fact': random_cat_fact(request),
         'logo': company_info.logo,
+        'slider_delay': company_info.slider_delay_in_millis,
         'sponsors': sponsors,
         'banners': banners
     }
@@ -141,6 +146,7 @@ def random_cat_fact(request):
     return dict(data)
 
 
+@user_passes_test(admin_required)
 def get_table_data(request):
     masters = User.objects.filter(groups__name='masters').all()
     contact_list = []
@@ -185,6 +191,7 @@ def get_master_json(request, master_id):
     return JsonResponse(json.dumps(data), safe=False)
 
 
+@user_passes_test(admin_required)
 def add_master(request):
     username = request.POST['username']
     first_name = request.POST['first_name']
@@ -235,3 +242,15 @@ def oop_page(request):
 def chart_page(request):
     return render(request, 'mainapp/chartjs.html')
 
+
+@user_passes_test(admin_required)
+def update_slider_setup(request):
+    company_info = CompanyInfo.objects.latest('id')
+    company_info.slider_delay_in_millis = request.POST['delay']
+    company_info.save()
+    return redirect('home')
+
+
+@user_passes_test(admin_required)
+def slider_setup_page(request):
+    return render(request, 'mainapp/slider_setup.html')
