@@ -1,0 +1,151 @@
+{% extends 'mainapp/layout.html' %}
+{% load static %}
+
+{% block title_block %}
+    Chart.js Animation
+{% endblock %}
+
+{% block main_block %}
+    <div class="heading_container">
+        <h1 class="heading_1">Chart.js Animation (arc-sine)</h1>
+    </div>
+    <canvas id="myChart"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Get reference to the canvas
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        // Define the data for the sine wave
+        const data = {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Accurate',
+                    data: [],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                    pointRadius: 0
+                },
+                {
+                    label: 'Series',
+                    data: [],
+                    borderColor: 'rgba(220, 100, 100, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                    pointRadius: 0
+                },
+            ]
+        };
+
+        // Create the Chart.js chart
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        min: -1,
+                        max: 1
+                    },
+                    y: {
+                        min: -3,
+                        max: 3
+                    }
+                },
+                animation: {
+                    duration: 0 // Disable the built-in animation for custom animation control
+                }
+            }
+        });
+
+        function factorial(x) {
+            let result = 1;
+            for (let i = 1; i <= x; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        function getAccurate(x) {
+            return Math.asin(x)
+        }
+
+        function getSeries(x) {
+            let eps = 0.07
+            let result = 0.0
+            let n = 0
+            while (true) {
+                if (n > 500) {
+                    throw 1;
+                }
+                if (Math.abs(result - getAccurate(x)) < eps) {
+                    return result
+                }
+                let top = factorial(2 * n) * x**(2 * n + 1)
+                let bottom = 4**n * factorial(n)**2 * (2 * n + 1)
+                let chunk = top / bottom
+                result += chunk
+                n += 1
+            }
+        }
+
+        // Variables to control the animation
+        let xValue = -1.0;
+        let xValueCopy = xValue;
+        const step = 0.01;  // Increment for each frame
+        const speed = 20;  // Speed of animation in milliseconds
+
+        // Function to generate the sine wave
+        function generateAccurate() {
+            const yValue = getAccurate(xValue);
+
+            // Update the data
+            data.labels.push(xValue.toFixed(1));  // Labels (X-axis)
+            data.datasets[0].data.push({x: xValue, y: yValue});  // Y-axis values
+
+            // Keep X-axis labels within a range of 10 (optional)
+            if (xValue >= 1.0) {
+                return;
+            }
+
+            // Update the chart
+            chart.update();
+
+            // Increment the x value for the next point
+            xValue += step;
+
+            // Continue the animation
+            setTimeout(generateAccurate, speed);
+        }
+
+        function generateSeries() {
+            const yValue = getSeries(xValueCopy);
+
+            // Update the data
+            data.labels.push(xValueCopy.toFixed(1));  // Labels (X-axis)
+            data.datasets[1].data.push({x: xValueCopy, y: yValue});  // Y-axis values
+
+            // Keep X-axis labels within a range of 10 (optional)
+            if (xValueCopy >= 1.0) {
+                return;
+            }
+
+            // Update the chart
+            chart.update();
+
+            // Increment the x value for the next point
+            xValueCopy += step;
+
+            // Continue the animation
+            setTimeout(generateSeries, speed);
+        }
+
+        // Start the animation
+        generateAccurate();
+        generateSeries();
+    </script>
+{% endblock %}

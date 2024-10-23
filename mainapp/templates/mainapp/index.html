@@ -9,14 +9,14 @@
         <div class="heading_container">
             <h1 class="heading_1">{{ header }}</h1>
         </div>
-        <div style="display: flex; justify-content:center;">
+        <div style="display: flex; justify-content:center; align-items: center; height: 100vh">
             <div class="main_animation">
                 <div class="phone" style="background-image: url('{% static 'phone_fixed.png' %}')"></div>
                 <div class="laptop" style="background-image: url('{% static 'laptop_fixed.png' %}')"></div>
                 <div class="wand" style="background-image: url('{% static 'wand.png' %}')"></div>
             </div>
         </div>
-        <div itemprop="advertisement" class="main_banner">
+        <div itemprop="advertisement" class="main_banner scroll_animation">
             <div class="slider" loop navs pagination pauseonhover delay=2500>
                 <div class="prev"><i class="fa-solid fa-chevron-left"></i></div>
                 <div class="next"><i class="fa-solid fa-chevron-right"></i></div>
@@ -32,11 +32,11 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="heading_container_symmetrical">
+        <div class="heading_container_symmetrical scroll_animation">
             <h2 class="heading_2">Latest news</h2>
         </div>
         {% include 'news_app/news_article_preview.html' with value=latest_news path=path %}
-        <div class="misc_container">
+        <div class="misc_container scroll_animation">
             <div itemprop="joke" style="width: 100%; padding: 20px;">
                 <h2 class="heading_2">Random joke</h2>
                 <p>{{ joke.setup }}</p>
@@ -50,7 +50,7 @@
         </div>
         <div itemprop="partners" class="sponsors">
             {% for sponsor in sponsors %}
-                <div class="sponsor_block">
+                <div class="sponsor_block scroll_animation_immovable">
                     <a target="_blank" href="{{ sponsor.website_link }}">
                         <img src="{{ sponsor.logo }}" alt="{{ sponsor.name }}">
                     </a>
@@ -61,4 +61,5 @@
         </div>
     </div>
     <script src="{% static 'slider.js' %}"></script>
+    <script src="{% static 'scroll_animation.js' %}"></script>
 {% endblock %}

@@ -230,3 +230,8 @@ def add_master(request):
 
 def oop_page(request):
     return render(request, 'mainapp/oop.html')
+
+
+def chart_page(request):
+    return render(request, 'mainapp/chartjs.html')
+

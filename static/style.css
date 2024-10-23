@@ -926,3 +926,11 @@ table, th, td {
 .page_style_picker > label > input {
     margin-left: 10px;
 }
+
+.scroll_animation {
+    transform: translateX(-0vw);
+}
+
+.scroll_animation_immovable {
+    transform: scale(0);
+}
