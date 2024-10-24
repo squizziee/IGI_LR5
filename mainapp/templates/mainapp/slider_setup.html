@@ -27,8 +27,9 @@
         form.addEventListener('submit', e => {
             e.preventDefault()
             showPreloader()
-            if (data.get('delay') < 100) {
-                alert(`Delay of ${data.get('delay')} is not acceptable`);
+            let delay = Number(data.get('delay'))
+            if (delay < 100) {
+                alert(`Delay of ${delay} is not acceptable`);
                 return;
             }
             fetch("/update_slider_setup/", {

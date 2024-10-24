@@ -20,40 +20,60 @@
     <title>{% block title_block %}{% endblock %}</title>
 </head>
 <body>
-    <div class="preloader_container ready" id="preloader">
-        <div class="preloader">
-            <div></div>
-            <div></div>
-            <div></div>
+<div class="preloader_container ready" id="preloader">
+    <div class="preloader">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="timer">
+    <div class="time">00:00:00:00</div>
+    <button class="reset_timer btn_general">Reset</button>
+</div>
+<div class="wrapper">
+    {% include 'mainapp/navigation.html' %}
+    <header class="main_header">
+        <h1 id="logo">TRIPLEC.COM</h1>
+        <div class="header_logo"></div>
+    </header>
+    <main class="content">
+        {% block main_block %}{% endblock %}
+    </main>
+    <footer class="main_footer">
+        <div style="text-align: center">
+            <code>No rights reserved. CCC Inc., 2024</code>
+            <br>
+            <samp>
+                Lorem ipsum dolor sit amet, consectetur <br>
+                adipisicing elit. Aliquid at, cumque doloremque <br>
+                doloribus illo maxime minima minus nam nisi non nulla obca <br>
+                ecati officia optio pariatur possimus soluta susc<wbr>ipit ut voluptates .
+            </samp>
         </div>
-    </div>
-    <div class="timer">
-        <div class="time">00:00:00:00</div>
-        <button class="reset_timer btn_general">Reset</button>
-    </div>
-    <div class="wrapper">
-        {% include 'mainapp/navigation.html' %}
-        <header class="main_header">
-            <h1>TRIPLEC.COM</h1>
-            <div class="header_logo"></div>
-        </header>
-        <main class="content">
-            {% block main_block %}{% endblock %}
-        </main>
-        <footer class="main_footer">
-            <div style="text-align: center">
-                <code>No rights reserved. CCC Inc., 2024</code>
-                <br>
-                <samp>
-                    Lorem ipsum dolor sit amet, consectetur <br>
-                    adipisicing elit. Aliquid at, cumque doloremque <br>
-                    doloribus illo maxime minima minus nam nisi non nulla obca <br>
-                    ecati officia optio pariatur possimus soluta susc<wbr>ipit ut voluptates .
-                </samp>
-            </div>
-        </footer>
-    </div>
-    <script src="{% static 'events.js' %}"></script>
-    <script src="{% static 'timer.js' %}"></script>
+    </footer>
+</div>
+<script src="{% static 'logo_animation.js' %}"></script>
+<script src="{% static 'events.js' %}"></script>
+<script src="{% static 'timer.js' %}"></script>
+<script>
+    const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+    };
+
+    function success(pos) {
+        const crd = pos.coords;
+        alert(`Your current position is:\nLatitude : ${crd.latitude}\nLongitude: ${crd.longitude}\nMore or less ${crd.accuracy} meters.`)
+    }
+
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+</script>
 </body>
 </html>
